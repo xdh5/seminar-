@@ -19,12 +19,10 @@ drawings:
 mdc: true
 ---
 
-# Welcome to Slidev1
+## Research on Complex Logistics Environment Path Planning Based on Ant Colony Algorithm and Deep Reinforcement Learning
 
-Presentation slides for developers
-
-<div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
-  Press Space for next page <carbon:arrow-right />
+<div class="mt-12 py-1" hover:bg="white op-10">
+  Zhao Zhiyu
 </div>
 
 <!--
