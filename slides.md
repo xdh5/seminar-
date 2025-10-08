@@ -19,7 +19,7 @@ drawings:
 mdc: true
 ---
 
-## Research on Complex Logistics Environment Path Planning Based on Ant Colony Algorithm and Deep Reinforcement Learning
+## Path Planning Technique for Mobile Robots: A Review
 
 <div class="mt-12 py-1" hover:bg="white op-10">
   Zhao Zhiyu
@@ -31,30 +31,52 @@ My research is about helping robots find the best path in a busy warehouse.
 -->
 
 ---
-layout: image-right
-image: ./assets/robot.png
-backgroundSize: 400px 80%
+theme: seriph
+layout: default
 ---
 
-## Background
+# Summary: How Robots Find Their Way
 
-- 🤖 **Lots of Robots** - More and more robots are working in big buildings to move stuff for us.
-- 🤔 **The Problem** - These places are very busy. The robots' old plans are too simple, so they get confused when things move.
-- 🔋 **Wasted Power** - When they get confused, the robots take longer trips. This wastes a lot of electricity, which is not good for our Earth.
+<div class="grid grid-cols-2 gap-8">
 
-We need to give the robots a smarter brain. This will help them find the best path, save energy, and protect our world!
+<div>
 
-<style>
-h2 {
-  background-color: #9A003D;
-  background-image: linear-gradient(45deg, #9A003D 10%, #9A003D 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
+### What is this paper about?
+This paper is a **review**. It gives us a big picture of **robot path planning**. It covers:
+* Important tech and main methods.
+* What we know now and future problems.
+
+<br>
+
+### What a robot needs before it moves
+It needs to understand two things:
+1. **The World (Maps)**
+2. **What is a "Good" Path?**
+
+
+</div>
+
+<div>
+
+### Two Main Types of Planning
+
+* **Single-Agent (SAPF):**
+  For **one robot** to find its path.
+
+* **Multi-Agent (MAPF):**
+  For a **group of robots** to work together and not crash.
+
+<br>
+
+### What's Next? Future Ideas
+
+* **Problems**: How to move in busy or changing places.
+* **The Future is AI**: Using **Artificial Intelligence (AI)** is a big new idea.
+* **Learning Robots**: AI helps robots learn from what they do, so they can make better choices.
+
+</div>
+
+</div>
 
 <!--
 So, let's look at the background for my research.
@@ -65,270 +87,269 @@ So, the goal of my research is to give these robots a smarter brain. A brain tha
 -->
 
 ---
-layout: image-right
-image: ./assets/warehouse.png
-backgroundSize: 400px 80%
+# 主題：seriph (這是一個簡潔的主題)
+theme: seriph
+# 版面：預設
+layout: default
 ---
 
-## Objective
+# The Classic Ways
 
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-    A["Integrates both global and local path planning"]
+<div class="grid grid-cols-2 gap-12 pt-4">
 
-    B["Global Path Planning"]
-    C["Local Path Planning"]
+<div>
+  <h3>📍 Dijkstra's Algorithm</h3>
+  <p class="text-lg opacity-60">Slow but Sure</p>
+
+  <div class="mt-4">
+    <p><strong>How it works:</strong></p>
+    <p>It starts at the beginning and checks <strong>every possible step</strong> outwards, like ripples in water, until it finds the goal.</p>
+  </div>
+
+  <div class="mt-4">
+    <p>👍 <strong>Good part:</strong></p>
+    <p>It <span class="text-green-500 font-bold">always</span> finds the shortest path. No mistakes.</p>
+  </div>
+
+  <div class="mt-4">
+    <p>👎 <strong>Bad part:</strong></p>
+    <p>It can be very slow because it checks too many useless places.</p>
+  </div>
+</div>
+
+<div>
+  <h3>⭐ A* (A-Star) Algorithm</h3>
+  <p class="text-lg opacity-60">Smart and Fast</p>
+
+  <div class="mt-4">
+    <p><strong>How it works:</strong></p>
+    <p>A smarter version of Dijkstra. It uses a clever <strong>"guess"</strong> to decide which way is closer to the goal. It doesn't waste time.</p>
+  </div>
+
+  <div class="mt-4">
+    <p class="text-xs mt-1">Total Score = <span class="text-blue-500">Distance from Start</span> + <span class="text-orange-500">Guessed Distance to Goal</span></p>
+  </div>
+
+  <div class="mt-4">
+    <p>👍<strong>Good part:</strong></p>
+    <p>It is much faster, but it <span class="text-green-500 font-bold">also</span> finds the shortest path. A true classic!</p>
+  </div>
+</div>
+
+</div>
+
+---
+theme: seriph
+layout: default
+---
+
+# The Classic Ways
+
+<div class="grid grid-cols-2 gap-12 pt-4">
+
+<div>
+  <div class="mt-6">
+    <h4><strong>RRT (Rapidly-exploring Random Tree)</strong></h4>
+    <p><strong>How it works:</strong> It "grows" a tree of paths by picking random spots. The tree branches out until one branch hits the goal.</p>
+    <p class="mt-2">✨ <strong>RRT* is a better version</strong> that keeps improving the path to make it shorter.</p>
+  </div>
+
+  <div class="mt-6">
+    <h4><strong>PRM (Probabilistic Roadmap)</strong></h4>
+    <p><strong>How it works:</strong> First, it places many random dots on the map. Then, it connects nearby dots to create a "road network". Finally, it finds the best path on these roads.</p>
+  </div>
+</div>
+
+<div>
+  <h4>🧲 Artificial Potential Field (APF)</h4>
+
+  <div class="mt-6">
+    <p><strong>How it works:</strong></p>
+    <p>Imagine the goal is a <span class="text-blue-500">positive magnet</span> that PULLS the robot. Obstacles are <span class="text-red-500">negative magnets</span> that PUSH it away. The robot just follows the forces!</p>
+  </div>
+
+  <div class="mt-6">
+    <p>👍 <strong>Good Parts:</strong></p>
+    <ul class="list-disc pl-5">
+      <li>It is very simple and fast.</li>
+      <li>The path it creates is very smooth.</li>
+    </ul>
+  </div>
+
+  <div class="mt-6">
+    <p>👎 <strong>Bad Part:</strong></p>
+    <p>The robot can get <strong>stuck</strong> if the push and pull forces become equal. It won't know where to go next.</p>
+  </div>
+</div>
+
+</div>
+
+---
+theme: seriph
+layout: default
+---
+
+# Intelligent optimization algorithm
+
+<div class="grid grid-cols-2 gap-12 pt-4">
+
+<div>
+  <h3>🐜 Ant Colony Optimization (ACO)</h3>
     
-    D["
-    - Ensures the robot follows the global path.<br/>
-    - Can timely avoid obstacles in a dynamic environment.<br/>
-    - Maintains both flexibility and efficiency of the path"]
+  <p class="mt-4"><strong>How it works:</strong></p>
+  <p>Many "virtual ants" search for a path. When they find a short path, they leave a strong trail (called a pheromone). Other ants will follow the strongest trail. Soon, all ants use the best path!</p>
+  
+  <p class="mt-4"><strong>Good Part:</strong></p>
+  <p>It's a very strong and reliable method.</p>
+</div>
 
-    A --> B
-    A --> C
-    B --> D
-    C --> D
-```
-
-<style>
-h2 {
-  background-color: #9A003D;
-  background-image: linear-gradient(45deg, #9A003D 10%, #9A003D 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-<!-- 
-So, what is the objective of my research?
-My goal is to create a system that combines two kinds of planning. You can think of it as a "big plan" and a "quick reaction" plan.
-The "big plan" is Global Path Planning. It's like using a map to find the best main route for a long trip.
-The "quick reaction" is Local Path Planning. This helps the robot see and avoid sudden obstacles, like another robot that is in the way.
-When we combine these two plans, we get three good results:
-The robot follows the best and most efficient main path.
-It can quickly and safely avoid any surprises.
-This makes the robot's final path both fast and flexible. This is the main goal.
--->
-
----
-layout: image-right
-image: ./assets/path planning.png
-backgroundSize: 200px 80%
----
-
-## Method
-
-```mermaid
-graph TD
-    %% 1. 定义所有节点
-    A[Start]
-    B["Ant colony algorithm"]
-    C["Dueling Double Deep Q-Network"]
-    D["Reward"]
-    E["Ensure local adjustments don't deviate from global path"]
-    F[End]
-
-    %% 2. 定义节点之间的连接关系
-    A --> B
-    A --> C
-    B --> D
-    C --> D
-    D --> E
-    E --> F
-```
-
-<style>
-h2 {
-  background-color: #9A003D;
-  background-image: linear-gradient(45deg, #9A003D 10%, #9A003D 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-<!-- Now, I will explain my method. It uses two main parts that work together.
-
-First, the Ant Colony Algorithm creates the "big plan." It finds the best and most efficient order to visit all the targets on the map.
-
-Second, the Dueling Double Deep Q-Network is for the "quick reactions." It is the robot's smart brain that helps it make decisions in real-time to avoid any surprise obstacles.
-
-The robot learns by getting rewards. It gets points for good actions, like following the big plan and avoiding walls.
-
-A key rule is that the robot's quick, local moves should not go too far away from the efficient main path.
-
-On the right, you can see an example. The top image shows the simple global path. The bottom image shows the robot's final path. It makes small changes to avoid things, but it still follows the main route. -->
-
----
-layout: image-right
-image: ./assets/ant.png
-backgroundSize: 80%
----
-
-## Global Path Planning
-
-<b>Ant Colony Optimization</b>
 <div>
-
-* **Idea:** 
-    * Ants leave a special scent on the ground.
-    * Shorter paths get a stronger scent, which attracts more ants.
-
-* **How Our Program Does It:**
-    * "Virtual ants" in the computer explore many different routes.
-    * Short routes get a strong "digital scent."
-
-* **The Goal:**
-    * To find the **best and shortest order** for the robot to visit all its targets.
+  <h3>🐦 Particle Swarm Optimization (PSO)</h3>
+    
+  <p class="mt-4"><strong>How it works:</strong></p>
+  <p>Many "particles" (like birds) fly around. Each particle remembers its own best spot and also knows the best spot the whole group has found. They use this information to fly towards better and better places.</p>
+  
+  <p class="mt-4"><strong>Good Part:</strong></p>
+  <p>It finds a good path by sharing information.</p>
 </div>
 
-<style>
-h2, b {
-  background-color: #9A003D;
-  background-image: linear-gradient(45deg, #9A003D 10%, #9A003D 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-div {
-  font-size: 14px
-}
-</style>
-
-<!-- First, let's look at Global Path Planning. I used the Ant Colony Optimization algorithm for this part.
-
-The main idea comes from how real ants find food. When an ant finds a good, short path, it leaves a special scent. This scent gets stronger as more ants use the path, and it attracts even more ants.
-
-My computer program does the same thing. I create "virtual ants" that explore many different routes to the robot's targets. When they find a short route, they leave a strong "digital scent."
-
-The pictures on the right show this process. At first, the paths are random. But slowly, the shorter, better paths get a stronger scent, and the bad paths are forgotten.
-
-So, the final goal of this method is to find the single best and shortest order for the robot to visit all of its targets. -->
+</div>
 
 ---
-layout: image-right
-image: ./assets/D3QN.png
-backgroundSize: 80%
+theme: seriph
+layout: default
 ---
 
-## Local Path Planning
+# Intelligent optimization algorithm
 
-<b>Dueling Double Deep Q-Network</b>
+### 🧬 Genetic Algorithm (GA)
+
+<p class="mt-4"><strong>How it works:</strong></p>
+<p>It "evolves" the best path over many generations, just like in nature!</p>
+
+<div class="mt-6 space-y-4">
+  <div class="flex items-start">
+    <div class="text-2xl mr-4">1.</div>
+    <div>
+      <h4 class="font-bold text-green-600">Selection</h4>
+      <span>Pick the "fittest" paths (the best ones) to be parents for the next generation.</span>
+    </div>
+  </div>
+  <div class="flex items-start">
+    <div class="text-2xl mr-4">2.</div>
+    <div>
+      <h4 class="font-bold text-blue-600">Crossover</h4>
+      <span>Mix parts of two parent paths to create new child paths. This combines good ideas.</span>
+    </div>
+  </div>
+  <div class="flex items-start">
+    <div class="text-2xl mr-4">3.</div>
+    <div>
+      <h4 class="font-bold text-orange-600">Mutation</h4>
+      <span>Make a small, random change to a path. This helps discover new, maybe even better, ideas.</span>
+    </div>
+  </div>
+</div>
+
+<p>It's very good at searching everywhere for the best path, but it can be slow.</p>
+
+---
+theme: seriph
+layout: default
+---
+
+# The AI Way
+
+<div class="grid grid-cols-2 gap-12 pt-4">
+
 <div>
+  <h3>🧠 Neural Network (NN)</h3>
 
-* **Idea:** 
-    * Inspired by how we train a pet with rewards.
-    * The robot learns from trial and error, just like a pet learns tricks for a treat.
+  <p class="mt-4"><strong>How it works:</strong></p>
+  <p>You "teach" the robot by showing it lots of maps and good paths. The robot's brain (the network) learns the rules. After training, it can look at a new map and quickly decide where to go.</p>
 
-* **How Our Program Does It:**
-    * The robot tries many different moves to explore the area.
-    * It gets "points" (rewards) for good moves, like getting closer to the goal.
-    * It loses points for bad moves, like hitting a wall.
+  <p class="mt-4"><strong>In short:</strong></p>
+  <p>It learns from examples to make fast decisions.</p>
+</div>
 
-* **The Goal:**
-    * To teach the robot a smart strategy so it automatically knows the best and safest move to make in any situation.
+<div>
+  <h3>🎮 Reinforcement Learning (RL)</h3>
+
+  <p class="mt-4"><strong>How it learns:</strong></p>
+  <ol class="list-decimal pl-5 space-y-2">
+    <li>The robot tries an <strong>Action</strong> (like moving forward).</li>
+    <li>The world gives it a <strong>Reward</strong> (a good point for a good move, a bad point for a crash).</li>
+    <li>The robot uses the reward to update its plan and make better choices next time.</li>
+  </ol>
+
+  <p class="mt-4">✨ <strong>Deep RL (DRL)</strong> is a super-smart version where the robot has a powerful brain (Deep Learning) and learns by trying. It's great for unknown places!</p>
+</div>
 
 </div>
 
-<style>
-h2, b {
-  background-color: #9A003D;
-  background-image: linear-gradient(45deg, #9A003D 10%, #9A003D 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-div {
-  font-size: 12px
-}
-</style>
-
-<!-- Next is Local Path Planning. This is the "quick reaction" part of my method, and I used a technique called the Dueling Double Deep Q-Network.
-
-The main idea is very similar to how we train a pet. The robot learns from trial and error. If it does something good, it gets a reward, and it learns to avoid bad actions.
-
-In my program, the robot explores by trying many different moves. It gets points, or rewards, for good moves, like getting closer to its goal. And it loses points for bad moves, like hitting a wall.
-
-The diagram on the right shows a small piece of the robot's "brain." This brain learns from all the rewards and punishments.
-
-The final goal is to teach this brain a smart strategy. After a lot of training, the robot will automatically know the best and safest move to make in any situation. -->
-
 ---
-# Frontmatter for configuration
-title: 'Expected Results'
-layout: center
+theme: seriph
+layout: default
 ---
 
-## What We Hope to Achieve
+# Comparing The Methods
 
-<div class="grid grid-cols-3 gap-8 text-center mt-10">
+<!-- Using text-xs for smaller font and gap-4 for less space -->
+<div class="grid grid-cols-3 gap-4 pt-2 text-xs">
 
-  <div>
-    <div class="text-4xl">
-      📈
-    </div>
-    <h3 class="font-bold mt-2">More Efficient</h3>
-    <ul class="text-left mt-2 text-sm">
-      <li>Faster task completion</li>
-      <li>Shorter travel distance</li>
-      <li>Less waiting time</li>
+  <!-- Column 1: Classic Algorithms -->
+  <div class="p-3 bg-gray-100 rounded">
+    <h3 class="font-bold text-base">Classic Ways</h3>
+    <p class="opacity-50">A*, RRT*, APF</p>
+    <hr class="my-1">
+    <p><strong>Idea:</strong> Uses math and rules.</p>
+    <p class="mt-2"><strong>Pros:</strong></p>
+    <ul class="list-disc pl-4">
+      <li>Reliable, finds the best path.</li>
     </ul>
-  </div>
-
-  <div>
-    <div class="text-4xl">
-      🛡️
-    </div>
-    <h3 class="font-bold mt-2">Smarter & Safer</h3>
-    <ul class="text-left mt-2 text-sm">
-      <li>Higher success rate</li>
-      <li>Better at avoiding surprises</li>
-      <li>Fewer collisions</li>
+    <p class="mt-2"><strong>Cons:</strong></p>
+    <ul class="list-disc pl-4">
+      <li>Needs a perfect map, not flexible.</li>
     </ul>
+    <p class="mt-2"><strong>Use:</strong> Known places (indoors, games).</p>
   </div>
 
-  <div>
-    <div class="text-4xl">
-      🌿
-    </div>
-    <h3 class="font-bold mt-2">Greener</h3>
-    <ul class="text-left mt-2 text-sm">
-      <li>Less wasted energy</li>
-      <li>Longer battery life</li>
-      <li>Smaller carbon footprint</li>
+  <!-- Column 2: Intelligent Optimization -->
+  <div class="p-3 bg-gray-100 rounded">
+    <h3 class="font-bold text-base">Intelligent optimization algorithm</h3>
+    <p class="opacity-50">ACO, PSO, GA</p>
+    <hr class="my-1">
+    <p><strong>Idea:</strong> Inspired by nature (ants, birds).</p>
+    <p class="mt-2"><strong>Pros:</strong></p>
+    <ul class="list-disc pl-4">
+      <li>Finds great paths, doesn't get stuck.</li>
     </ul>
+    <p class="mt-2"><strong>Cons:</strong></p>
+    <ul class="list-disc pl-4">
+      <li>Slow, hard to set up.</li>
+    </ul>
+    <p class="mt-2"><strong>Use:</strong> Complex problems.</p>
   </div>
 
-  <div class="w-200 h-50 flex justify-center items-center">
-    <img class="w-full h-full object-cover" src='./assets/green.png'>
+  <!-- Column 3: Artificial Intelligence -->
+  <div class="p-3 bg-gray-100 rounded">
+    <h3 class="font-bold text-base">The AI Way</h3>
+    <p class="opacity-50">NN, DRL</p>
+    <hr class="my-1">
+    <p><strong>Idea:</strong> Learns from data and trying.</p>
+    <p class="mt-2"><strong>Pros:</strong></p>
+    <ul class="list-disc pl-4">
+      <li>Adapts to new places, no map needed.</li>
+    </ul>
+    <p class="mt-2"><strong>Cons:</strong></p>
+    <ul class="list-disc pl-4">
+      <li>Needs lots of data & power.</li>
+    </ul>
+    <p class="mt-2"><strong>Use:</strong> Unknown places (outdoors, driving).</p>
   </div>
+
 </div>
 
-<style>
-h2 {
-  background-color: #9A003D;
-  background-image: linear-gradient(45deg, #9A003D 10%, #9A003D 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-<!-- So, what do we hope to achieve with this research? There are three main benefits.
-
-First, the robots will be more efficient. This means they will finish their tasks faster, travel shorter distances, and spend less time waiting.
-
-Second, they will be smarter and safer. They will be much better at avoiding surprise obstacles. This leads to a higher success rate and, most importantly, fewer collisions.
-
-Finally, being more efficient also makes the robots greener. When they use less energy, their batteries last longer. This reduces electricity waste and helps lower the warehouse's carbon footprint, supporting sustainability. -->
+<div class="mt-4 text-center text-gray-500 text-sm">
+  <strong>Conclusion:</strong> Classic ways are the base, Intelligent optimization algorithm solve tough problems, and AI is the future.
+</div>
