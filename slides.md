@@ -19,7 +19,7 @@ drawings:
 mdc: true
 ---
 
-## Path Planning Technique for Mobile Robots: A Review
+## Path planning techniques for mobile robots: Review and prospect
 
 <div class="mt-12 py-1" hover:bg="white op-10">
   Zhao Zhiyu
@@ -35,107 +35,36 @@ theme: seriph
 layout: default
 ---
 
-# Summary: How Robots Find Their Way
 
-<div class="grid grid-cols-2 gap-8">
+## Paper Reading Plan
 
-<div>
+<br/>
 
-### What is this paper about?
-This paper is a **review**. It gives us a big picture of **robot path planning**. It covers:
-* Important tech and main methods.
-* What we know now and future problems.
+### Last Week
 
-<br>
+* **Paper:** *Path Planning Technique for Mobile Robots: A Review*
+* **Focus:** Got a foundational overview of the path plan methods.
 
-### What a robot needs before it moves
-It needs to understand two things:
-1. **The World (Maps)**
-2. **What is a "Good" Path?**
+<br/>
 
+### This Week
 
-</div>
+* **Paper:** *Path planning techniques for mobile robots: Review and prospect*
+* **Focus:** Understanding the core concepts of global vs. local planning (Chapter 2).
 
-<div>
+<br/>
 
-### Two Main Types of Planning
+### Next Week
 
-* **Single-Agent (SAPF):**
-  For **one robot** to find its path.
-
-* **Multi-Agent (MAPF):**
-  For a **group of robots** to work together and not crash.
-
-<br>
-
-### What's Next? Future Ideas
-
-* **Problems**: How to move in busy or changing places.
-* **The Future is AI**: Using **Artificial Intelligence (AI)** is a big new idea.
-* **Learning Robots**: AI helps robots learn from what they do, so they can make better choices.
-
-</div>
-
-</div>
-
-<!--
-So, let's look at the background for my research.
-First, there are lots of robots. Because we all shop online more, companies use more robots in their warehouses to move things quickly.
-But there is a problem. These warehouses are very busy and always changing. The robots' plans are too simple, like a basic map. They get confused when something unexpected blocks their way.
-This confusion causes them to take long, inefficient trips. This wastes a lot of battery power. With thousands of robots, it's a big waste of electricity and bad for the environment.
-So, the goal of my research is to give these robots a smarter brain. A brain that can see the busy environment and make smart decisions. This will help them find the best path, save energy, and create a greener system.
--->
+* **Paper:** *Path planning techniques for mobile robots: Review and prospect* (Continue)
+* **Focus:** Moving on to the "Algorithms" section (Chapter 3) of the paper.
 
 ---
-# 主題：seriph (這是一個簡潔的主題)
 theme: seriph
-# 版面：預設
 layout: default
 ---
-
-# The Classic Ways
-
-<div class="grid grid-cols-2 gap-12 pt-4">
-
-<div>
-  <h3>📍 Dijkstra's Algorithm</h3>
-  <p class="text-lg opacity-60">Slow but Sure</p>
-
-  <div class="mt-4">
-    <p><strong>How it works:</strong></p>
-    <p>It starts at the beginning and checks <strong>every possible step</strong> outwards, like ripples in water, until it finds the goal.</p>
-  </div>
-
-  <div class="mt-4">
-    <p>👍 <strong>Good part:</strong></p>
-    <p>It <span class="text-green-500 font-bold">always</span> finds the shortest path. No mistakes.</p>
-  </div>
-
-  <div class="mt-4">
-    <p>👎 <strong>Bad part:</strong></p>
-    <p>It can be very slow because it checks too many useless places.</p>
-  </div>
-</div>
-
-<div>
-  <h3>⭐ A* (A-Star) Algorithm</h3>
-  <p class="text-lg opacity-60">Smart and Fast</p>
-
-  <div class="mt-4">
-    <p><strong>How it works:</strong></p>
-    <p>A smarter version of Dijkstra. It uses a clever <strong>"guess"</strong> to decide which way is closer to the goal. It doesn't waste time.</p>
-  </div>
-
-  <div class="mt-4">
-    <p class="text-xs mt-1">Total Score = <span class="text-blue-500">Distance from Start</span> + <span class="text-orange-500">Guessed Distance to Goal</span></p>
-  </div>
-
-  <div class="mt-4">
-    <p>👍<strong>Good part:</strong></p>
-    <p>It is much faster, but it <span class="text-green-500 font-bold">also</span> finds the shortest path. A true classic!</p>
-  </div>
-</div>
-
+<div class="w-full h-full flex items-center justify-center">
+  <img src="./assets/wechat_2025-10-15_171037_212.png" class="w-full h-[500px] object-contain" />
 </div>
 
 ---
@@ -143,74 +72,76 @@ theme: seriph
 layout: default
 ---
 
-# The Classic Ways
+Today, we will look at a paper about how robots find their way.
 
-<div class="grid grid-cols-2 gap-12 pt-4">
+* **1. Introduction**
+    * What are mobile robots and why is planning a path so important?
 
-<div>
-  <div class="mt-6">
-    <h4><strong>RRT (Rapidly-exploring Random Tree)</strong></h4>
-    <p><strong>How it works:</strong> It "grows" a tree of paths by picking random spots. The tree branches out until one branch hits the goal.</p>
-    <p class="mt-2">✨ <strong>RRT* is a better version</strong> that keeps improving the path to make it shorter.</p>
-  </div>
+* **2. Global & Local Path Planning**
+    * The two main ways robots plan. Global is like using a full map, while Local is for exploring unknown areas.
 
-  <div class="mt-6">
-    <h4><strong>PRM (Probabilistic Roadmap)</strong></h4>
-    <p><strong>How it works:</strong> First, it places many random dots on the map. Then, it connects nearby dots to create a "road network". Finally, it finds the best path on these roads.</p>
-  </div>
-</div>
+* **3. Path Planning Algorithms**
+    * Different methods robots use to choose the best path. This includes classic methods, ideas from nature, and AI. 
 
-<div>
-  <h4>🧲 Artificial Potential Field (APF)</h4>
-
-  <div class="mt-6">
-    <p><strong>How it works:</strong></p>
-    <p>Imagine the goal is a <span class="text-blue-500">positive magnet</span> that PULLS the robot. Obstacles are <span class="text-red-500">negative magnets</span> that PUSH it away. The robot just follows the forces!</p>
-  </div>
-
-  <div class="mt-6">
-    <p>👍 <strong>Good Parts:</strong></p>
-    <ul class="list-disc pl-5">
-      <li>It is very simple and fast.</li>
-      <li>The path it creates is very smooth.</li>
-    </ul>
-  </div>
-
-  <div class="mt-6">
-    <p>👎 <strong>Bad Part:</strong></p>
-    <p>The robot can get <strong>stuck</strong> if the push and pull forces become equal. It won't know where to go next.</p>
-  </div>
-</div>
-
-</div>
-
----
-theme: seriph
-layout: default
----
-
-# Intelligent optimization algorithm
-
-<div class="grid grid-cols-2 gap-12 pt-4">
-
-<div>
-  <h3>🐜 Ant Colony Optimization (ACO)</h3>
+* **4. Conclusion & Future**
+    * What we learned and what's next for robot path planning.
     
-  <p class="mt-4"><strong>How it works:</strong></p>
-  <p>Many "virtual ants" search for a path. When they find a short path, they leave a strong trail (called a pheromone). Other ants will follow the strongest trail. Soon, all ants use the best path!</p>
-  
-  <p class="mt-4"><strong>Good Part:</strong></p>
-  <p>It's a very strong and reliable method.</p>
-</div>
+---
+theme: seriph
+layout: default
+---
+
+## Two Basic Ways of Path Planning
+
+* **Global Planning**
+    * The robot has the **full map** from the start.
+    * The goal: find the **best possible route** to the finish line.
+    * This is also called **offline planning**.
+
+* **Local Planning**
+    * The robot **doesn't know the map** and must explore.
+    * It's super flexible, but might get stuck or not find the perfect path.
+    * This is also called **online planning** .
+
+---
+theme: seriph
+layout: default
+---
+
+## Making a Map for the Robot
+
+<br/>
+
+<div class="grid grid-cols-2 gap-8 items-center">
 
 <div>
-  <h3>🐦 Particle Swarm Optimization (PSO)</h3>
-    
-  <p class="mt-4"><strong>How it works:</strong></p>
-  <p>Many "particles" (like birds) fly around. Each particle remembers its own best spot and also knows the best spot the whole group has found. They use this information to fly towards better and better places.</p>
-  
-  <p class="mt-4"><strong>Good Part:</strong></p>
-  <p>It finds a good path by sharing information.</p>
+<h4>Grid Method (GM)</h4>
+<ul>
+  <li><b>What it is:</b> Cuts the world into small squares, like a checkerboard.</li>
+  <li>✅ <b>Good:</b> Super simple and easy to use.</li>
+  <li>❌ <b>Bad:</b> The square size is tricky. Too big is inaccurate, too small uses lots of memory.</li>
+</ul>
+</div>
+
+<div class="w-[200px] h-[200px] object-contain">
+<img src="./assets/unnamed.png" class="rounded-lg shadow-lg">
+</div>
+
+</div>
+
+<div class="grid grid-cols-2 gap-8 items-center mt-8">
+
+<div>
+<h4>Topological Method (TM)</h4>
+<ul>
+  <li><b>What it is:</b> Connects important places with lines, like a subway map.</li>
+  <li>✅ <b>Good:</b> Great for very big areas and saves memory.</li>
+  <li>❌ <b>Bad:</b> Can be difficult to create and maintain.</li>
+</ul>
+</div>
+
+<div class="w-[200px] h-[200px] object-contain">
+<img src="./assets/164f3775-2d2a-4287-9282-8c9b312875b6.png" class="rounded-lg shadow-lg">
 </div>
 
 </div>
@@ -220,136 +151,79 @@ theme: seriph
 layout: default
 ---
 
-# Intelligent optimization algorithm
+## More Choices for Making a Map
 
-### 🧬 Genetic Algorithm (GA)
+<br/>
 
-<p class="mt-4"><strong>How it works:</strong></p>
-<p>It "evolves" the best path over many generations, just like in nature!</p>
+### Geometric Method (GCM)
+* **What it is:** Uses simple shapes like lines and circles to describe the world.
+* ✅ **Good:** Saves a lot of memory and is easy to work with.
+* ❌ **Bad:** It's hard to find these simple shapes in a messy, complex place.
 
-<div class="mt-6 space-y-4">
-  <div class="flex items-start">
-    <div class="text-2xl mr-4">1.</div>
-    <div>
-      <h4 class="font-bold text-green-600">Selection</h4>
-      <span>Pick the "fittest" paths (the best ones) to be parents for the next generation.</span>
-    </div>
-  </div>
-  <div class="flex items-start">
-    <div class="text-2xl mr-4">2.</div>
-    <div>
-      <h4 class="font-bold text-blue-600">Crossover</h4>
-      <span>Mix parts of two parent paths to create new child paths. This combines good ideas.</span>
-    </div>
-  </div>
-  <div class="flex items-start">
-    <div class="text-2xl mr-4">3.</div>
-    <div>
-      <h4 class="font-bold text-orange-600">Mutation</h4>
-      <span>Make a small, random change to a path. This helps discover new, maybe even better, ideas.</span>
-    </div>
-  </div>
-</div>
+<br/>
 
-<p>It's very good at searching everywhere for the best path, but it can be slow.</p>
+### Mixed Method (MR)
+* **What it is:** A mix of the best parts from other methods. It uses a detailed map for small areas and a simple map for the big picture
+* ✅ **Good:** You get the speed of one method and the accuracy of another, all in one.
 
 ---
 theme: seriph
 layout: default
 ---
 
-# The AI Way
+## How to Judge a Good Path?
 
-<div class="grid grid-cols-2 gap-12 pt-4">
+To measure how good a path planning algorithm is, the paper suggests seven methods.
 
-<div>
-  <h3>🧠 Neural Network (NN)</h3>
+* **Planning Time ($t_m$)**: How fast is the algorithm?
 
-  <p class="mt-4"><strong>How it works:</strong></p>
-  <p>You "teach" the robot by showing it lots of maps and good paths. The robot's brain (the network) learns the rules. After training, it can look at a new map and quickly decide where to go.</p>
+* **Time Reliability (RT)**: Is the planning time always consistent?
 
-  <p class="mt-4"><strong>In short:</strong></p>
-  <p>It learns from examples to make fast decisions.</p>
-</div>
+* **Path Length ($D_m$)**: How short is the path?
 
-<div>
-  <h3>🎮 Reinforcement Learning (RL)</h3>
+* **Length Reliability (RD)**: Does the algorithm make similar paths on different maps?
 
-  <p class="mt-4"><strong>How it learns:</strong></p>
-  <ol class="list-decimal pl-5 space-y-2">
-    <li>The robot tries an <strong>Action</strong> (like moving forward).</li>
-    <li>The world gives it a <strong>Reward</strong> (a good point for a good move, a bad point for a crash).</li>
-    <li>The robot uses the reward to update its plan and make better choices next time.</li>
-  </ol>
+* **Path Smoothness (RC)**: How many turns does the robot have to make?
 
-  <p class="mt-4">✨ <strong>Deep RL (DRL)</strong> is a super-smart version where the robot has a powerful brain (Deep Learning) and learns by trying. It's great for unknown places!</p>
-</div>
+* **Tracking Time (ETT)**: How long will the robot take to actually follow the path?
 
-</div>
+* **Success Rate (SR)**: Can the algorithm always find a safe, collision-free path?
 
 ---
 theme: seriph
 layout: default
 ---
 
-# Comparing The Methods
+## Local Planning: Sensing an Unknown World
 
-<!-- Using text-xs for smaller font and gap-4 for less space -->
-<div class="grid grid-cols-3 gap-4 pt-2 text-xs">
+Local path planning depends on sensors to see the environment in real-time, especially when building a map from scratch.
 
-  <!-- Column 1: Classic Algorithms -->
-  <div class="p-3 bg-gray-100 rounded">
-    <h3 class="font-bold text-base">Classic Ways</h3>
-    <p class="opacity-50">A*, RRT*, APF</p>
-    <hr class="my-1">
-    <p><strong>Idea:</strong> Uses math and rules.</p>
-    <p class="mt-2"><strong>Pros:</strong></p>
-    <ul class="list-disc pl-4">
-      <li>Reliable, finds the best path.</li>
-    </ul>
-    <p class="mt-2"><strong>Cons:</strong></p>
-    <ul class="list-disc pl-4">
-      <li>Needs a perfect map, not flexible.</li>
-    </ul>
-    <p class="mt-2"><strong>Use:</strong> Known places (indoors, games).</p>
-  </div>
+* **Laser Radar Sensor (LRS)**
+    * An active sensor often used for building maps.
+    * ✅ **Good:** Has a long detection range, is very accurate, and works well even when lighting changes.
+    * ❌ **Bad:** It is expensive and can have trouble modeling environments with repetitive shapes.
 
-  <!-- Column 2: Intelligent Optimization -->
-  <div class="p-3 bg-gray-100 rounded">
-    <h3 class="font-bold text-base">Intelligent optimization algorithm</h3>
-    <p class="opacity-50">ACO, PSO, GA</p>
-    <hr class="my-1">
-    <p><strong>Idea:</strong> Inspired by nature (ants, birds).</p>
-    <p class="mt-2"><strong>Pros:</strong></p>
-    <ul class="list-disc pl-4">
-      <li>Finds great paths, doesn't get stuck.</li>
-    </ul>
-    <p class="mt-2"><strong>Cons:</strong></p>
-    <ul class="list-disc pl-4">
-      <li>Slow, hard to set up.</li>
-    </ul>
-    <p class="mt-2"><strong>Use:</strong> Complex problems.</p>
-  </div>
+* **Visual Sensor (VS) / Camera**
+    * A passive sensor that gets information from reflected light.
+    * ✅ **Good:** Has a wider detection range and can capture rich image information.
+    * ❌ **Bad:** Can be easily confused by uneven lighting or shadows, which can cause it to miss or wrongly detect things.
 
-  <!-- Column 3: Artificial Intelligence -->
-  <div class="p-3 bg-gray-100 rounded">
-    <h3 class="font-bold text-base">The AI Way</h3>
-    <p class="opacity-50">NN, DRL</p>
-    <hr class="my-1">
-    <p><strong>Idea:</strong> Learns from data and trying.</p>
-    <p class="mt-2"><strong>Pros:</strong></p>
-    <ul class="list-disc pl-4">
-      <li>Adapts to new places, no map needed.</li>
-    </ul>
-    <p class="mt-2"><strong>Cons:</strong></p>
-    <ul class="list-disc pl-4">
-      <li>Needs lots of data & power.</li>
-    </ul>
-    <p class="mt-2"><strong>Use:</strong> Unknown places (outdoors, driving).</p>
-  </div>
+---
+theme: seriph
+layout: default
+---
 
-</div>
+## 1 + 1 > 2: The Power of Fusing Sensors
 
-<div class="mt-4 text-center text-gray-500 text-sm">
-  <strong>Conclusion:</strong> Classic ways are the base, Intelligent optimization algorithm solve tough problems, and AI is the future.
-</div>
+* **What is MIF (Multi-sensor Information Fusion)?**
+    * It means using algorithms to combine data from many sensors.
+    * The goal is to get a more reliable and accurate picture of the world around the robot.
+
+* **Why use MIF?**
+    * **They complete each other:** Cameras can't sense distance well, but Lasers (LRS) can. Lasers get less information, but cameras can be used for things like closed-loop detection.
+    * **More robust:** A single sensor struggles with complex and changing environments.
+    * **Better sensing:** Fusing sensors can give robots 3D perception and improve accuracy by reducing noise.
+
+* **Common Fusion Methods**
+    * Camera + Inertial Measurement Unit (IMU).
+    * Laser + Camera.
