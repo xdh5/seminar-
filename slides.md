@@ -19,7 +19,7 @@ drawings:
 mdc: true
 ---
 
-## Path planning techniques for mobile robots: Review and prospect
+## A genetic algorithm for minimizing energy consumption in warehouses
 
 <div class="mt-12 py-1" hover:bg="white op-10">
   Zhao Zhiyu
@@ -49,266 +49,335 @@ layout: default
 
 ### This Week
 
-* **Paper:** *Path planning techniques for mobile robots: Review and prospect*
-* **Focus:** Moving on to the "Algorithms" section (Chapter 3) of the paper.
+* **Paper:** *A genetic algorithm for minimizing energy consumption in warehouses*
+* **Focus:** Understanding the basic concepts, core types, and main algorithms of path planning.
 
 <br/>
 
 ### Next Week
 
 * **Paper:** *A genetic algorithm for minimizing energy consumption in warehouses*
-* **Focus:** Understanding the basic concepts, core types, and main algorithms of path planning.
+* **Focus:** Understanding Solution methodology and Numerical experiments.
 
 ---
-layout: center
+# 这是一个注释：你可以使用 'layout: default' 或 'layout: bullets'
+layout: default
 ---
 
-# How Robots Find Their Way! 
-
-<div class="grid grid-cols-3 gap-8 text-center mt-8">
-
-<div>
-  <h2 class="text-3xl">1. Classical Algorithms </h2>
-  <p class="mt-4">
-    These are the first and oldest ways to help a robot. They follow simple rules to find the best path.
-  </p>
-  <ul class="list-none mt-4">
-    <li>Dijkstra</li>
-    <li>A*</li>
-    <li>RRT</li>
-    <li>APF</li>
-  </ul>
-</div>
-
-<div>
-  <h2 class="text-3xl">2. Bionic Algorithms </h2>
-  <p class="mt-4">
-    We learn from animals! These methods copy how ants find food or how birds fly together.
-  </p>
-  <ul class="list-none mt-4">
-    <li>Ants Teamwork</li>
-    <li>Bird Flocks</li>
-  </ul>
-</div>
-
-<div>
-  <h2 class="text-3xl">3. AI Algorithms </h2>
-  <p class="mt-4">
-    We give the robot a brain to think and learn. It can make its own smart choices!
-  </p>
-  <ul class="list-none mt-4">
-    <li>"Maybe" Logic (Fuzzy Logic)</li>
-    <li>Robot Brain (Neural Network)</li>
-  </ul>
-</div>
-
+<div style="display: flex; justify-content: center">
+<img style="height: 450px; width: 650px " src="./assets/e765eb7d-6fab-4cf0-8280-8c342432003a.jpg">
 </div>
 
 ---
+# 这是一个注释：你可以使用 'layout: default' 或 'layout: bullets'
+layout: default
 ---
 
-# 1. Classic Algorithms
+## Research Background and Motivation
 
-<div class="grid grid-cols-3 gap-8 mt-8">
+<br/>
+<div class="grid grid-cols-3 gap-8">
 
 <div>
-  <h2 class="text-2xl font-bold">Cell Decomposition</h2>
-  <ul class="mt-4 space-y-2">
-    <li><b>How it works:</b> Breaks the world into small, simple squares. The robot finds a path using these squares.</li>
-    <li class="mt-2"><b>Why it's good:</b> It is simple and easy to use. It is the most popular way to make a map.</li>
-  </ul>
+<h3 class="flex items-center">
+  1. Green Supply Chains Management
+</h3>
+
+*   **What is it?** GSCM means adding "green ideas" to the whole supply chain.
+*   **Where?** This includes product design, making things, warehousing, and delivery.
+*   **Why now?** Many companies and researchers now care about sustainability and our planet.
 </div>
 
 <div>
-  <h2 class="text-2xl font-bold">Graph Search Algorithm (GSA)</h2>
-  <ul class="mt-4 space-y-2">
-    <li><b>Dijkstra:</b> Checks all the nodes. It always finds the best path, but it is very slow.</li>
-    <li class="mt-2"><b>A* (A-star):</b> A smarter way. It "guesses" how far the end is. This makes it much faster. It is a key tool for path planning.</li>
-  </ul>
+<h3 class="flex items-center">
+  <i class="fa-solid fa-warehouse text-blue-600 mr-3"></i>
+  2. Green Warehousing
+</h3>
+
+*   **A Must-Do:** Because GSCM is important, warehouses must also be "green."
+*   **The Goal:** To reduce the bad effects on our environment.
+*   **The Role:** Warehouses are a key part of any supply chain.
 </div>
 
 <div>
-  <h2 class="text-2xl font-bold">Sampling Based Method (SBM)</h2>
-  <ul class="mt-4 space-y-2">
-    <li><b>RRT (Rapidly-exploring Random Tree):</b> "Grows" a random tree to explore the map. It is good at finding a path in big, complex spaces.</li>
-    <li class="mt-2"><b>PRM (Probabilistic Roadmap):</b> Puts many random dots on the map. It then tries to connect the dots to make a road map.</li>
-  </ul>
+<h3 class="flex items-center">
+  <i class="fa-solid fa-user-check text-orange-600 mr-3"></i>
+  3. Customer Changes
+</h3>
+
+*   **New Needs:** Customers want things faster and more accurately. (e.g., from e-commerce)
+*   **New Thinking:** At the same time, customers are thinking more about green problems and sustainability.
 </div>
 
 </div>
 
 ---
+# 这是一个注释：使用 'layout: default' 布局
+layout: default
 ---
 
-# 1. Classic Algorithms
+# The Main Problem - Order Picking
 
-<div class="grid grid-cols-2 gap-8 mt-10">
+<div class="grid grid-cols-3 gap-8">
 
 <div>
-  <h2 class="text-2xl font-bold">Artificial Potential Field (APF)</h2>
-  <ul class="mt-4 space-y-2">
-    <li><b>How it works:</b> The robot is in a "force field".
-      <ul class="list-disc pl-6 mt-2">
-        <li>The <b>Goal</b> pulls the robot.</li>
-        <li><b>Obstacles</b> push the robot.</li>
+  <h2 class="flex items-center">
+    <!-- 图标：一个购物车 -->
+    <i class="fa-solid fa-cart-shopping text-blue-600 mr-3"></i>
+    1. Why Order Picking?
+  </h2>
+
+  * **What is it?** Getting items from shelves for customers.
+  * **Key Points:**
+      * In manual warehouses: It needs the most **workers**.
+      * In auto warehouses: It costs the most **money**.
+  * **The Big Problem:** It uses the most time and **the most energy**.
+</div>
+
+<div>
+  <h2 class="flex items-center">
+    <!-- 图标：一个放大镜，表示研究 -->
+    <i class="fa-solid fa-magnifying-glass-chart text-orange-600 mr-3"></i>
+    2. Old Studies
+  </h2>
+
+  * **Old Goal:** Most studies tried to make it faster (time) or cheaper (cost).
+  * **What they missed:** They did not study **energy use**.
+</div>
+
+<div>
+  <h2 class="flex items-center">
+    <!-- 图S标：一个靶心，表示目标 -->
+    <i class="fa-solid fa-bullseye text-green-600 mr-3"></i>
+    3. Our Study
+  </h2>
+
+  * **New Idea:** We want to **use less energy** (not just less time).
+  * **How?** We use a "Genetic Algorithm" (GA) to find the best way.
+  * **How?:** How we store items on the shelves is also very important.
+</div>
+
+</div>
+
+---
+# 这是一个注释：使用 'layout: default' 布局
+layout: default
+---
+
+# Literature review
+
+<div class="grid gap-12">
+
+<div>
+  <h2 class="flex items-center">
+    <!-- 图标：一个时钟 -->
+    <i class="fa-solid fa-clock text-blue-600 mr-3"></i>
+    Main Goal of Old Studies
+  </h2>
+
+  <p class="mb-4">Most studies tried to make warehouse operations <strong>faster (less time)</strong> or <strong>cheaper (less cost)</strong>.</p>
+
+  <ul class="list-disc pl-6 space-y-2">
+    <li>
+      <strong></strong> Made a system to save travel <strong>distance and cost</strong>.
+    </li>
+    <li>
+      <strong></strong> Used GA to get the shortest <strong>travel distance</strong>.
+    </li>
+     <li>
+      <strong></strong> Used math to lower <strong>travel cost</strong>.
+    </li>
+    <li>
+      <strong></strong> Used simulation to study the <strong>picker's travel path</strong>.
+    </li>
+  </ul>
+
+</div>
+
+  <p>All these old papers only used <strong>time</strong>, <strong>distance</strong>, or <strong>cost</strong> to check if a solution was "good".</p>
+</div>
+
+---
+# 这是一个注释：使用 'layout: default' 布局
+layout: default
+---
+
+# Our Contribution
+
+<div class="grid grid-cols-2 gap-12">
+
+<div>
+  <h2 class="flex items-center">
+    <!-- 图标：一片叶子 -->
+    <i class="fa-solid fa-leaf text-green-600 mr-3"></i>
+    1. Focus on "Green" Studies
+  </h2>
+
+  <p class="mb-4">Not many papers talk about "green" or "sustainable" warehouses.</p>
+
+  <ul class="list-disc pl-6 space-y-2">
+    <li>
+      <strong></strong> Talked about green order picking methods.
+    </li>
+    <li>
+      <strong></strong> Studied energy use in <strong>automated</strong> (robot) warehouses.
+    </li>
+     <li>
+      <strong></strong> Measured CO2 savings with a computer simulation.
+    </li>
+  </ul>
+
+</div>
+
+<div>
+  <h2 class="flex items-center">
+    <!-- 图标：一个灯泡，代表新想法 -->
+    <i class="fa-solid fa-lightbulb text-yellow-500 mr-3"></i>
+    2. New algorithm
+  </h2>
+
+  <ul class="list-disc pl-6 space-y-2">
+    <li>
+      <strong>It's Different:</strong> We study <strong>"picker-to-part"</strong> (manual) warehouses.
+    </li>
+    <li>
+      <strong>Our Goal:</strong> We want to <strong>minimize energy use</strong>.
+    </li>
+    <li>
+      <strong>Our Method:</strong> We use a Genetic Algorithm (GA) to solve two problems at once:
+        <br/>
+        - 1. Order <strong>Batching</strong> (grouping orders)
+        <br/>
+        - 2. <strong>Routing</strong> (finding the best path)
+    </li>
+  </ul>
+</div>
+
+</div>
+---
+# 这是一个注释：使用 'layout: default' 布局
+layout: default
+---
+
+# The Problem (System & Layout)
+
+<div class="grid grid-cols-2 gap-12">
+
+<div>
+  <h2 class="flex items-center">
+    <!-- 图标：叉车 -->
+    <i class="fa-solid fa-truck-forklift text-orange-600 mr-3"></i>
+    1. System Setup
+  </h2>
+
+  <ul class="list-disc pl-6 space-y-2">
+    <li v-clicks>
+      <strong>System Type:</strong> Manual warehousing.
+    </li>
+    <li v-clicks>
+      It's a <strong>"Picker-to-part"</strong>
+    </li>
+    <li v-clicks>
+      <strong>How it works:</strong>
+      <ul class="list-circle pl-6 mt-1">
+        <li>Pickers follow an "order pick list".</li>
+        <li>They drive a <strong>forklift</strong>.</li>
+        <li>The trip starts at the "I/O point".</li>
       </ul>
     </li>
-    <li class="mt-4"><b>Good parts:</b> The path is smooth. It thinks fast. It is very good for avoid new things.</li>
-    <li class="mt-4"><b>Bad parts:</b> The robot can get "stuck" in a trap or "cannot reach the goal".</li>
+    <li v-clicks>
+      <strong>Key Strategy:</strong> Order <strong>Batching</strong>.
+      This means they group many orders into one trip.
+    </li>
+  </ul>
+
+</div>
+
+<div>
+  <h2 class="flex items-center">
+    <!-- 图标：网格布局 -->
+    <i class="fa-solid fa-table-cells-large text-blue-600 mr-3"></i>
+    2. Warehouse Layout
+  </h2>
+
+  <ul class="list-disc pl-6 space-y-2">
+    <li v-clicks>
+      <strong>Structure:</strong> 12 shelves, 13 picking aisles.
+    </li>
+    <li v-clicks>
+      <strong>Details:</strong> 4 layers and 2 sides on each shelf.
+    </li>
+    <li v-clicks>
+      <strong>Total:</strong> 2400 storage locations.
+    </li>
+    <li v-clicks>
+      <strong>Key Sizes:</strong>
+      <ul class="list-circle pl-6 mt-1">
+        <li>Aisle Length: 62.5 m</li>
+        <li>Aisle Width: 5 m</li>
+        <li>Shelf Width: 2 m</li>
+        <li>Space (horizontal): 2.5 m</li>
+        <li>Space (vertical): 1.5 m</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+</div>
+
+---
+# 这是一个注释：使用 'layout: default' 布局
+layout: default
+---
+
+# The Problem (Key Numbers)
+
+<div class="grid grid-cols-3 gap-8">
+
+<div>
+  <h2 class="flex items-center">
+    <!-- 图标：速度计 -->
+    <i class="fa-solid fa-gauge-high text-blue-600 mr-3"></i>
+    1. Forklift Speeds
+  </h2>
+  <p>We use these numbers to build our energy model.</p>
+  <ul class="list-disc pl-6 mt-4 space-y-2">
+    <li>Horizontal Speed: <br/> <strong class="text-2xl">10 km/h</strong></li>
+    <li class="mt-4">Vertical Speed: <br/> <strong class="text-2xl">0.53 km/h</strong></li>
   </ul>
 </div>
 
 <div>
-  <h2 class="text-2xl font-bold">Dynamic Window Approach (DWA)</h2>
-  <ul class="mt-4 space-y-2">
-    <li><b>How it works:</b> A popular way to plan local paths.</li>
-    <li class="mt-4"><b>What it does:</b> It thinks hard about the robot's <b>body rules</b> . It "imagines" many local paths it can take. Then, it picks the best one.</li>
+  <h2 class="flex items-center">
+    <!-- 图标：星星 -->
+    <i class="fa-solid fa-star text-yellow-500 mr-3"></i>
+    2. The Key Insight
+  </h2>
+  <p class="mt-4">
+    Driving side-to-side (10 km/h) is
+  </p>
+  <p class="text-5xl font-bold my-6 text-center text-red-600">
+    ~19x
+  </p>
+  <p>
+    <strong>faster</strong> than lifting the fork up-and-down (0.53 km/h).
+  </p>
+</div>
+
+<div>
+  <h2 class="flex items-center">
+    <!-- 图标：路径 -->
+    <i class="fa-solid fa-route text-green-600 mr-3"></i>
+    3. What This Means
+  </h2>
+  <ul class="list-disc pl-6 mt-4 space-y-2">
+    <li>
+      <strong>The Real Problem:</strong> Moving <strong>up-and-down</strong> is the operation that uses the most time and energy.
+    </li>
+    <li class="mt-4">
+      <strong>How to Save Energy:</strong> A good path (routing) must be smart. It must try to reduce the up-and-down travel.
+    </li>
   </ul>
 </div>
 
 </div>
-
----
----
-
-# 2. Bionic Algorithms
-
-<p class="mt-4">
-  <b>Main Idea:</b> We copy smart group behaviors from nature to solve hard problems.
-</p>
-
-<div class="grid grid-cols-3 gap-6 mt-8 text-center">
-
-<div>
-  <h2 class="font-bold">ACO</h2>
-  <p class="mt-2">
-    Copies how <b>ants</b> use trails to find the shortest path.
-  </p>
-</div>
-
-<div>
-  <h2 class="font-bold">GA</h2>
-  <p class="mt-2">
-    Copies <b>"survival of the fittest"</b> (selection, crossover, mutation) to find better paths.
-  </p>
-</div>
-
-<div>
-  <h2 class="font-bold">PSO</h2>
-  <p class="mt-2">
-    Copies how <b>birds</b> search for food. They share the "best spot" with the group.
-  </p>
-</div>
-
-</div>
-
-<div classs="mt-10">
-  <h2 class="text-xl font-bold text-center mt-10">Other Algorithms</h2>
-  <p class="text-center mt-2">
-    Like Bacterial Foraging (BFO), Sparrow Search (SSA), Grey Wolf Optimizer (GWO), etc.
-  </p>
-</div>
-
----
----
-# 3. AI Algorithms
-
-<p class="mt-4 text-xl">
-<b>Main Idea:</b> We give the robot a "brain" to learn, think, and make smart decisions.
-</p>
-
-<div class="grid grid-cols-2 gap-8 mt-10">
-
-<div>
-<h2 class="text-2xl font-bold">Fuzzy Logic (FL)</h2>
-<ul class="mt-4 space-y-2">
-<li><b>How it works:</b> Copies how people think and drive using "fuzzy" ideas.</li>
-<li><b>Example:</b> It changes "Distance is 2.5 meters" into "Very Close". Then it uses a rule like "If 'Very Close', then true.</li>
-<li><b>Good for:</b> Handling sensor noise and unknown areas.</li>
-</ul>
-</div>
-
-<div>
-<h2 class="text-2xl font-bold">Bioinspired Neural Network (BNN)</h2>
-<ul class="mt-4 space-y-2">
-<li><b>How it works:</b> Uses a neural network's dynamic power to plan a path.</li>
-<li><b>Special thing:</b> The BNN in the paper <b>does not need to learn first</b>. It finds a path very fast by passing messages.</li>
-</ul>
-</div>
-
-</div>
-
----
----
-<p class="mt-4 text-lg">
-Based on 105 papers, here is what we found:
-</p>
-
-<div class="mt-8 space-y-6">
-
-<div>
-<h2 class="text-xl font-bold">How to Make Maps:</h2>
-<ul class="list-disc pl-6 mt-2">
-<li><b>Grid Method</b> is the clear winner (85.7%). It is simple and easy to make bigger.</li>
-</ul>
-</div>
-
-<div>
-<h2 class="text-xl font-bold">How to Use Algorithms:</h2>
-<ul class="list-disc pl-6 mt-2">
-<li>For <b>Global Planning</b>, people like <b>Classic Algorithms</b> (like A*, RRT).</li>
-<li>For <b>Local Planning</b>, people use <b>AI</b> and <b>Bionic Algorithms</b>.</li>
-</ul>
-</div>
-
-<div>
-<h2 class="text-xl font-bold">What is Missing:</h2>
-<ul class="list-disc pl-6 mt-2">
-<li><b>Dimension:</b> Most research is for <b>2D</b>. Not much work is done for <b>3D</b>.</li>
-<li><b>Testing:</b> Most tests are on a <b>computer simulation</b>. Not many tests are on a <b>real robot</b>.</li>
-<li><b>New Ideas:</b> Most work makes one algorithm better. Not much work mixes algorithms.</li>
-</ul>
-</div>
-
-</div>
-
----
----
-# What's Next?
-<ul class="mt-8 space-y-4 text-xl">
-
-<li>
-<b>1. Algorithm Fusion</b>
-<p class="text-lg ml-6">
-Mix algorithms to get the best parts of each.
-
-
-
-
-
-(Example: Use <b>A*</b> for the big plan, and <b>DWA</b> or <b>APF</b> for local avoid.)
-</p>
-</li>
-
-<li>
-<b>2. Global + Local</b>
-<p class="text-lg ml-6">
-Connect the big plan (Global) with what the robot sees right now (Local feedback).
-</p>
-</li>
-
-<li>
-<b>3. Adding Learning</b>
-<p class="text-lg ml-6">
-Add learning (like <b>Reinforcement Learning</b>). This helps robots adapt to new, busy places, like a mall.
-</p>
-</li>
-
-<li>
-<b>4. Multi-Robot Collaboration</b>
-<p class="text-lg ml-6">
-Plan paths for <i>many</i> robots so they don't crash. This is a big challenge for warehouses and delivery.
-</p>
-</li>
-
-</ul>
