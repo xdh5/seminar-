@@ -19,7 +19,7 @@ drawings:
 mdc: true
 ---
 
-## A genetic algorithm for minimizing energy consumption in warehouses
+## ASSUMPTIONS OF LINEAR PROGRAMMING
 
 <div class="mt-12 py-1" hover:bg="white op-10">
   Zhao Zhiyu
@@ -31,390 +31,242 @@ My research is about helping robots find the best path in a busy warehouse.
 -->
 
 ---
-theme: seriph
-layout: default
+layout: 'default'
 ---
 
+# Assumption 1: Proportionality
 
-## Paper Reading Plan
+### Definition
+*   The contribution of each activity ($x_j$) to the objective function ($Z$) is proportional to its level (e.g., $c_j x_j$).
+*   The contribution of each activity to each constraint is also proportional to its level (e.g., $a_{ij} x_j$).
 
-<br/>
+### Implication
+*   The exponent of any variable in the objective function or constraints must be **1**.
+*   This means no non-linear terms like $x^2$, $\sqrt{x}$, or $x_1 x_2$.
+*   This is the "Linear" part of **Linear** Programming.
 
-### Last Week
-
-* **Paper:** *Path planning techniques for mobile robots: Review and prospect*
-* **Focus:** Understanding the core concepts of global vs. local planning (Chapter 2).
-
-<br/>
-
-### This Week
-
-* **Paper:** *A genetic algorithm for minimizing energy consumption in warehouses*
-* **Focus:** Understanding the basic concepts, core types, and main algorithms of path planning.
-
-<br/>
-
-### Next Week
-
-* **Paper:** *A genetic algorithm for minimizing energy consumption in warehouses*
-* **Focus:** Understanding Solution methodology and Numerical experiments.
+### Example (Wyndor Glass Co.)
+*   Assume profit for Product 1 is $3x_1$.
+*   If $x_1 = 1$ (1 batch), then Profit = **$3k**.
+*   If $x_1 = 2$ (2 batches), then Profit = **$6k**.
+*   The profit ($6k$) is exactly **twice** the profit for 1 batch ($3k$), satisfying the assumption.
 
 ---
-# 这是一个注释：你可以使用 'layout: default' 或 'layout: bullets'
-layout: default
+layout: 'default'
 ---
 
-<div style="display: flex; justify-content: center">
-<img style="height: 450px; width: 650px " src="./assets/e765eb7d-6fab-4cf0-8280-8c342432003a.jpg">
-</div>
+# When is Proportionality Violated?
+
+The assumption is violated when the marginal contribution (profit or cost) of an activity changes.
+
+### 1. Start-up Costs
+*   **Description:** A fixed cost is incurred as soon as an activity begins ($x_1 > 0$).
+*   **Example:** The profit function becomes $3x_1 - 1$ (if $x_1 > 0$), but is 0 if $x_1 = 0$.
+
+### 2. Economies of Scale (Increasing Returns)
+*   **Description:** Efficiency increases as the activity level grows (e.g., bulk discounts, learning curves), increasing the profit margin per unit.
+
+### 3. Diminishing Marginal Returns
+*   **Description:** Costs rise as the activity level increases (e.g., needing more advertising or price cuts to sell more), decreasing the profit margin per unit.
+
+<br>
+
+### What If It's Violated?
+*   **For Start-up Costs:** Use **Mixed-Integer Programming (MIP)**.
+*   **For Changing Marginal Returns:** Use **Non-Linear Programming (NLP)**.
 
 ---
-# 这是一个注释：使用 'layout: default' 布局
-layout: default
+layout: 'default'
 ---
 
-# Table of Contents
+## Assumption 2: Additivity
 
-<div class="grid grid-cols-2 gap-10">
+### Definition
+*   Every function in an LP model (objective or constraint) must be the sum of the individual contributions from each activity.
 
-<div>
+### Implication
+*   This assumption rules out any **cross-product terms** (terms involving the product of two or more variables, such as $x_1 x_2$).
 
-* <strong class="text-xl">1. Introduction</strong>
-    <br><span class="opacity-75">Why we study this problem (the "green" goal).</span>
+### Violation Examples (Objective Function)
+*   **Case 1: Complementary Products**
+    *   Joint promotion (e.g., shared advertising) makes total profit *greater* than the sum of individual profits.
+    *   Example: $Z = 3x_1 + 5x_2 + x_1 x_2$
 
-* <strong class="text-xl">2. Literature review</strong>
-    <br><span class="opacity-75">What old studies did vs. our new idea.</span>
+*   **Case 2: Competing Products**
+    *   Products compete for resources (e.g., production line changeover time) making total profit *less* than the sum of individual profits.
+    *   Example: $Z = 3x_1 + 5x_2 - x_1 x_2$
 
-* <strong class="text-xl">3. Problem description</strong>
-    <br><span class="opacity-75">The warehouse layout and forklift speeds.</span>
-
-* <strong class="text-xl">4. Solution methodology</strong>
-    <br><span class="opacity-75">How our Genetic Algorithm (GA) works.</span>
-
-</div>
-
-<div>
-
-* <strong class="text-xl">5. Numerical experiments</strong>
-    <br><span class="opacity-75">Testing the GA and showing the results.</span>
-
-* <strong class="text-xl">6. Conclusions</strong>
-    <br><span class="opacity-75">What we learned and what to do next.</span>
-
-</div>
-
-</div>
+### What If It's Violated?
+*   The model will contain non-linear terms and must be solved using **Non-Linear Programming (NLP)**.
 
 ---
-# 这是一个注释：你可以使用 'layout: default' 或 'layout: bullets'
-layout: default
+layout: 'default'
 ---
 
-## Research Background and Motivation
+# Assumption 3: Divisibility
 
-<br/>
-<div class="grid grid-cols-3 gap-8">
+### Definition
+*   Decision variables are allowed to take any value, including non-integer (fractional) values, that satisfies the constraints.
+*   Assumes that activities can be run at fractional levels.
 
-<div>
-<h3 class="flex items-center">
-  1. Green Supply Chains Management
-</h3>
+### Example (Wyndor Glass Co.)
+*   The decision variables represent **production rates** (e.g., number of batches produced *per week*).
+*   A production rate can be fractional (e.g., $x_1 = 2.5$ batches/week).
+*   Therefore, the assumption holds in this context.
 
-*   **What is it?** GSCM means adding "green ideas" to the whole supply chain.
-*   **Where?** This includes product design, making things, warehousing, and delivery.
-*   **Why now?** Many companies and researchers now care about sustainability and our planet.
-</div>
-
-<div>
-<h3 class="flex items-center">
-  <i class="fa-solid fa-warehouse text-blue-600 mr-3"></i>
-  2. Green Warehousing
-</h3>
-
-*   **A Must-Do:** Because GSCM is important, warehouses must also be "green."
-*   **The Goal:** To reduce the bad effects on our environment.
-*   **The Role:** Warehouses are a key part of any supply chain.
-</div>
-
-<div>
-<h3 class="flex items-center">
-  <i class="fa-solid fa-user-check text-orange-600 mr-3"></i>
-  3. Customer Changes
-</h3>
-
-*   **New Needs:** Customers want things faster and more accurately. (e.g., from e-commerce)
-*   **New Thinking:** At the same time, customers are thinking more about green problems and sustainability.
-</div>
-
-</div>
+### What If It's Violated?
+*   This occurs if some or all decision variables *must* be integers (e.g., you cannot build 0.5 airplanes or assign 0.5 employees).
+*   The model becomes an **Integer Programming (IP)** model.
 
 ---
-# 这是一个注释：使用 'layout: default' 布局
-layout: default
+layout: 'default'
 ---
 
-# The Main Problem - Order Picking
+# Assumption 4: Certainty
 
-<div class="grid grid-cols-3 gap-8">
+### Definition
+* All parameter values in the model—objective function coefficients ($c_j$), constraint coefficients ($a_{ij}$), and right-hand-side values ($b_i$)—are assumed to be known, exact constants.
 
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：一个购物车 -->
-    <i class="fa-solid fa-cart-shopping text-blue-600 mr-3"></i>
-    1. Why Order Picking?
-  </h2>
+### Reality
+* In practice, this assumption is rarely met perfectly.
+* LP models often use predictions about the future, which inherently involves uncertainty.
 
-  * **What is it?** Getting items from shelves for customers.
-  * **Key Points:**
-      * In manual warehouses: It needs the most **workers**.
-      * In auto warehouses: It costs the most **money**.
-  * **The Big Problem:** It uses the most time and **the most energy**.
-</div>
-
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：一个放大镜，表示研究 -->
-    <i class="fa-solid fa-magnifying-glass-chart text-orange-600 mr-3"></i>
-    2. Old Studies
-  </h2>
-
-  * **Old Goal:** Most studies tried to make it faster (time) or cheaper (cost).
-  * **What they missed:** They did not study **energy use**.
-</div>
-
-<div>
-  <h2 class="flex items-center">
-    <!-- 图S标：一个靶心，表示目标 -->
-    <i class="fa-solid fa-bullseye text-green-600 mr-3"></i>
-    3. Our Study
-  </h2>
-
-  * **New Idea:** We want to **use less energy** (not just less time).
-  * **How?** We use a "Genetic Algorithm" (GA) to find the best way.
-  * **How?:** How we store items on the shelves is also very important.
-</div>
-
-</div>
+### How to Handle?
+* After finding a solution, it is crucial to perform **Sensitivity Analysis**.
+* This analysis identifies "sensitive parameters"—those whose values cannot change without changing the optimal solution.
+* If uncertainty is very high, other methods may be required.
 
 ---
-# 这是一个注释：使用 'layout: default' 布局
-layout: default
+layout: 'default'
 ---
 
-# Literature review
+# The Assumptions in Perspective
 
-<div class="grid gap-12">
+*   **Models are Idealizations, Not Reality**
+    *   Assumptions are necessary to make the problem **tractable** (solvable).
 
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：一个时钟 -->
-    <i class="fa-solid fa-clock text-blue-600 mr-3"></i>
-    Main Goal of Old Studies
-  </h2>
+*   **Minor Violations are Common**
+    *   In practice, assumptions are rarely met perfectly, which is often acceptable.
 
-  <p class="mb-4">Most studies tried to make warehouse operations <strong>faster (less time)</strong> or <strong>cheaper (less cost)</strong>.</p>
+*   **The Goal is "Reasonable Approximation"**
+    *   The model's predictions just need to correlate well with the real world.
 
-  <ul class="list-disc pl-6 space-y-2">
-    <li>
-      <strong></strong> Made a system to save travel <strong>distance and cost</strong>.
-    </li>
-    <li>
-      <strong></strong> Used GA to get the shortest <strong>travel distance</strong>.
-    </li>
-     <li>
-      <strong></strong> Used math to lower <strong>travel cost</strong>.
-    </li>
-    <li>
-      <strong></strong> Used simulation to study the <strong>picker's travel path</strong>.
-    </li>
-  </ul>
-
-</div>
-
-  <p>All these old papers only used <strong>time</strong>, <strong>distance</strong>, or <strong>cost</strong> to check if a solution was "good".</p>
-</div>
+*   **Serious Violations Require New Models**
+    *   If assumptions are badly broken, LP is not the right tool.
+    *   Consider using Non-Linear or Integer Programming instead.
 
 ---
-# 这是一个注释：使用 'layout: default' 布局
-layout: default
+layout: 'default'
 ---
 
-# Our Contribution
+<div style="transform: scale(0.57); top: -240px; position: relative;">
 
-<div class="grid grid-cols-2 gap-12">
+```python
+import gurobipy as gp
+from gurobipy import GRB
 
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：一片叶子 -->
-    <i class="fa-solid fa-leaf text-green-600 mr-3"></i>
-    1. Focus on "Green" Studies
-  </h2>
+costs = {
+    'Shift_1': 170, 'Shift_2': 160, 'Shift_3': 175, 'Shift_4': 180, 'Shift_5': 195
+}
 
-  <p class="mb-4">Not many papers talk about "green" or "sustainable" warehouses.</p>
+min_needed = {
+    (6, 8): 48, (8, 10): 79, (10, 12): 65, (12, 14): 87, (14, 16): 64,
+    (16, 18): 73, (18, 20): 82, (20, 22): 43, (22, 24): 52, (0, 6): 15
+}
 
-  <ul class="list-disc pl-6 space-y-2">
-    <li>
-      <strong></strong> Talked about green order picking methods.
-    </li>
-    <li>
-      <strong></strong> Studied energy use in <strong>automated</strong> (robot) warehouses.
-    </li>
-     <li>
-      <strong></strong> Measured CO2 savings with a computer simulation.
-    </li>
-  </ul>
+shift_coverage = {
+    'Shift_1': [(6, 8), (8, 10), (10, 12), (12, 14)],
+    'Shift_2': [(8, 10), (10, 12), (12, 14), (14, 16)],
+    'Shift_3': [(12, 14), (14, 16), (16, 18), (18, 20)],
+    'Shift_4': [(16, 18), (18, 20), (20, 22), (22, 24)],
+    'Shift_5': [(22, 24), (0, 6)]
+}
 
-</div>
+m = gp.Model("PersonnelScheduling")
 
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：一个灯泡，代表新想法 -->
-    <i class="fa-solid fa-lightbulb text-yellow-500 mr-3"></i>
-    2. New algorithm
-  </h2>
+shifts = list(costs.keys())
+x = m.addVars(shifts, vtype=GRB.INTEGER, name="agents")
 
-  <ul class="list-disc pl-6 space-y-2">
-    <li>
-      <strong>It's Different:</strong> We study <strong>"picker-to-part"</strong> (manual) warehouses.
-    </li>
-    <li>
-      <strong>Our Goal:</strong> We want to <strong>minimize energy use</strong>.
-    </li>
-    <li>
-      <strong>Our Method:</strong> We use a Genetic Algorithm (GA) to solve two problems at once:
-        <br/>
-        - 1. Order <strong>Batching</strong> (grouping orders)
-        <br/>
-        - 2. <strong>Routing</strong> (finding the best path)
-    </li>
-  </ul>
-</div>
+m.setObjective(gp.quicksum(costs[j] * x[j] for j in shifts), GRB.MINIMIZE)
 
-</div>
----
-# 这是一个注释：使用 'layout: default' 布局
-layout: default
----
+for (start, end), needed in min_needed.items():
+    covering_shifts = []
+    for shift, intervals in shift_coverage.items():
+        if (start, end) in intervals:
+            covering_shifts.append(shift)
+    
+    m.addConstr(
+        gp.quicksum(x[j] for j in covering_shifts) >= needed, 
+        name=f"Time_{start}_{end}"
+    )
 
-# The Problem (System & Layout)
+m.optimize()
 
-<div class="grid grid-cols-2 gap-12">
+print(f"cost: ${m.ObjVal:.2f}")
+for j in shifts:
+    if x[j].X > 0.001:
+        print(f"  {j}: {int(x[j].X)}")
 
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：叉车 -->
-    <i class="fa-solid fa-truck-forklift text-orange-600 mr-3"></i>
-    1. System Setup
-  </h2>
-
-  <ul class="list-disc pl-6 space-y-2">
-    <li v-clicks>
-      <strong>System Type:</strong> Manual warehousing.
-    </li>
-    <li v-clicks>
-      It's a <strong>"Picker-to-part"</strong>
-    </li>
-    <li v-clicks>
-      <strong>How it works:</strong>
-      <ul class="list-circle pl-6 mt-1">
-        <li>Pickers follow an "order pick list".</li>
-        <li>They drive a <strong>forklift</strong>.</li>
-        <li>The trip starts at the "I/O point".</li>
-      </ul>
-    </li>
-    <li v-clicks>
-      <strong>Key Strategy:</strong> Order <strong>Batching</strong>.
-      This means they group many orders into one trip.
-    </li>
-  </ul>
-
-</div>
-
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：网格布局 -->
-    <i class="fa-solid fa-table-cells-large text-blue-600 mr-3"></i>
-    2. Warehouse Layout
-  </h2>
-
-  <ul class="list-disc pl-6 space-y-2">
-    <li v-clicks>
-      <strong>Structure:</strong> 12 shelves, 13 picking aisles.
-    </li>
-    <li v-clicks>
-      <strong>Details:</strong> 4 layers and 2 sides on each shelf.
-    </li>
-    <li v-clicks>
-      <strong>Total:</strong> 2400 storage locations.
-    </li>
-    <li v-clicks>
-      <strong>Key Sizes:</strong>
-      <ul class="list-circle pl-6 mt-1">
-        <li>Aisle Length: 62.5 m</li>
-        <li>Aisle Width: 5 m</li>
-        <li>Shelf Width: 2 m</li>
-        <li>Space (horizontal): 2.5 m</li>
-        <li>Space (vertical): 1.5 m</li>
-      </ul>
-    </li>
-  </ul>
-</div>
+# cost: $30610.00
+#   Shift_1: 48
+#   Shift_2: 31
+#   Shift_3: 39
+#   Shift_4: 43
+#   Shift_5: 15
+```
 
 </div>
 
 ---
-# 这是一个注释：使用 'layout: default' 布局
-layout: default
+layout: 'default'
 ---
 
-# The Problem (Key Numbers)
+<div style="transform: scale(0.6); top: -180px; position: relative;">
 
-<div class="grid grid-cols-3 gap-8">
+```python
+import gurobipy as gp
+from gurobipy import GRB
 
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：速度计 -->
-    <i class="fa-solid fa-gauge-high text-blue-600 mr-3"></i>
-    1. Forklift Speeds
-  </h2>
-  <p>We use these numbers to build our energy model.</p>
-  <ul class="list-disc pl-6 mt-4 space-y-2">
-    <li>Horizontal Speed: <br/> <strong class="text-2xl">10 km/h</strong></li>
-    <li class="mt-4">Vertical Speed: <br/> <strong class="text-2xl">0.53 km/h</strong></li>
-  </ul>
-</div>
+lanes, costs, capacities = gp.multidict({
+    ('F1', 'F2'): (2, 10),
+    ('F1', 'DC'): (4, float('inf')),
+    ('F1', 'W1'): (9, float('inf')),
+    ('F2', 'DC'): (3, float('inf')),
+    ('DC', 'W2'): (1, 80),
+    ('W1', 'W2'): (3, float('inf')),
+    ('W2', 'W1'): (2, float('inf'))
+})
 
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：星星 -->
-    <i class="fa-solid fa-star text-yellow-500 mr-3"></i>
-    2. The Key Insight
-  </h2>
-  <p class="mt-4">
-    Driving side-to-side (10 km/h) is
-  </p>
-  <p class="text-5xl font-bold my-6 text-center text-red-600">
-    ~19x
-  </p>
-  <p>
-    <strong>faster</strong> than lifting the fork up-and-down (0.53 km/h).
-  </p>
-</div>
+demand = {
+    'F1': 50, 'F2': 40, 'DC': 0, 'W1': -30, 'W2': -60
+}
 
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：路径 -->
-    <i class="fa-solid fa-route text-green-600 mr-3"></i>
-    3. What This Means
-  </h2>
-  <ul class="list-disc pl-6 mt-4 space-y-2">
-    <li>
-      <strong>The Real Problem:</strong> Moving <strong>up-and-down</strong> is the operation that uses the most time and energy.
-    </li>
-    <li class="mt-4">
-      <strong>How to Save Energy:</strong> A good path (routing) must be smart. It must try to reduce the up-and-down travel.
-    </li>
-  </ul>
-</div>
+nodes = list(demand.keys())
 
+m = gp.Model("DistributionNetwork")
+
+x = m.addVars(lanes, obj=costs, ub=capacities, name="ship")
+
+m.ModelSense = GRB.MINIMIZE
+
+m.addConstrs(
+    (x.sum(i, '*') - x.sum('*', i) == demand[i] for i in nodes),
+    name="NetFlow"
+)
+
+m.optimize()
+
+print(f"cost: ${m.ObjVal * 100:.2f}")
+for i, j in lanes:
+    if x[i, j].X > 0.001:
+        print(f"  {i} -> {j}: {x[i, j].X} ")
+
+# cost: $49000.00
+  # F1 -> DC: 40.0
+  # F1 -> W1: 10.0
+  # F2 -> DC: 40.0
+  # DC -> W2: 80.0
+  # W2 -> W1: 20.0
+
+```
 </div>
