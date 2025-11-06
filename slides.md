@@ -69,6 +69,43 @@ layout: default
 </div>
 
 ---
+# 这是一个注释：使用 'layout: default' 布局
+layout: default
+---
+
+# Table of Contents
+
+<div class="grid grid-cols-2 gap-10">
+
+<div>
+
+* <strong class="text-xl">1. Introduction</strong>
+    <br><span class="opacity-75">Why we study this problem (the "green" goal).</span>
+
+* <strong class="text-xl">2. Literature review</strong>
+    <br><span class="opacity-75">What old studies did vs. our new idea.</span>
+
+* <strong class="text-xl">3. Problem description</strong>
+    <br><span class="opacity-75">The warehouse layout and forklift speeds.</span>
+
+* <strong class="text-xl">4. Solution methodology</strong>
+    <br><span class="opacity-75">How our Genetic Algorithm (GA) works.</span>
+
+</div>
+
+<div>
+
+* <strong class="text-xl">5. Numerical experiments</strong>
+    <br><span class="opacity-75">Testing the GA and showing the results.</span>
+
+* <strong class="text-xl">6. Conclusions</strong>
+    <br><span class="opacity-75">What we learned and what to do next.</span>
+
+</div>
+
+</div>
+
+---
 # 这是一个注释：你可以使用 'layout: default' 或 'layout: bullets'
 layout: default
 ---
