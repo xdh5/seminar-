@@ -19,254 +19,186 @@ drawings:
 mdc: true
 ---
 
-## ASSUMPTIONS OF LINEAR PROGRAMMING
+## Network Optimization Models
 
 <div class="mt-12 py-1" hover:bg="white op-10">
   Zhao Zhiyu
 </div>
 
-<!--
-Hello everyone. My name is Zhao Zhiyu.
-My research is about helping robots find the best path in a busy warehouse.
--->
-
 ---
-layout: 'default'
+layout: default
 ---
 
-# Assumption 1: Proportionality
+# Chapter 10: Network Optimization Models
 
-### Definition
-*   The contribution of each activity ($x_j$) to the objective function ($Z$) is proportional to its level (e.g., $c_j x_j$).
-*   The contribution of each activity to each constraint is also proportional to its level (e.g., $a_{ij} x_j$).
+<div class="grid grid-cols-2 gap-10 pt-5">
 
-### Implication
-*   The exponent of any variable in the objective function or constraints must be **1**.
-*   This means no non-linear terms like $x^2$, $\sqrt{x}$, or $x_1 x_2$.
-*   This is the "Linear" part of **Linear** Programming.
+<div>
 
-### Example (Wyndor Glass Co.)
-*   Assume profit for Product 1 is $3x_1$.
-*   If $x_1 = 1$ (1 batch), then Profit = **$3k**.
-*   If $x_1 = 2$ (2 batches), then Profit = **$6k**.
-*   The profit ($6k$) is exactly **twice** the profit for 1 batch ($3k$), satisfying the assumption.
+### Background & Applications
 
----
-layout: 'default'
----
+* **Ubiquitous Networks:** Transportation, electrical, communications, supply chain management, and financial planning.
+* **Visualization:** Network diagrams effectively illustrate relationships between system components (science, social, and economic fields).
+* **Technological Impact:** Breakthroughs in algorithms and computer science now allow for solving large-scale network problems.
 
-# When is Proportionality Violated?
+</div>
 
-The assumption is violated when the marginal contribution (profit or cost) of an activity changes.
+<div>
 
-### 1. Start-up Costs
-*   **Description:** A fixed cost is incurred as soon as an activity begins ($x_1 > 0$).
-*   **Example:** The profit function becomes $3x_1 - 1$ (if $x_1 > 0$), but is 0 if $x_1 = 0$.
+### 5 Core Problem Types
 
-### 2. Economies of Scale (Increasing Returns)
-*   **Description:** Efficiency increases as the activity level grows (e.g., bulk discounts, learning curves), increasing the profit margin per unit.
+1.  **Shortest-Path Problem**
+2.  **Minimum Spanning Tree Problem**
+3.  **Maximum Flow Problem**
+4.  **Minimum Cost Flow Problem**
+    * *Most general structure: includes the first three plus transportation/assignment problems.*
+5.  **Project Management (CPM/PERT)**
+    * *Involves time-cost trade-offs.*
 
-### 3. Diminishing Marginal Returns
-*   **Description:** Costs rise as the activity level increases (e.g., needing more advertising or price cuts to sell more), decreasing the profit margin per unit.
-
-<br>
-
-### What If It's Violated?
-*   **For Start-up Costs:** Use **Mixed-Integer Programming (MIP)**.
-*   **For Changing Marginal Returns:** Use **Non-Linear Programming (NLP)**.
-
----
-layout: 'default'
----
-
-## Assumption 2: Additivity
-
-### Definition
-*   Every function in an LP model (objective or constraint) must be the sum of the individual contributions from each activity.
-
-### Implication
-*   This assumption rules out any **cross-product terms** (terms involving the product of two or more variables, such as $x_1 x_2$).
-
-### Violation Examples (Objective Function)
-*   **Case 1: Complementary Products**
-    *   Joint promotion (e.g., shared advertising) makes total profit *greater* than the sum of individual profits.
-    *   Example: $Z = 3x_1 + 5x_2 + x_1 x_2$
-
-*   **Case 2: Competing Products**
-    *   Products compete for resources (e.g., production line changeover time) making total profit *less* than the sum of individual profits.
-    *   Example: $Z = 3x_1 + 5x_2 - x_1 x_2$
-
-### What If It's Violated?
-*   The model will contain non-linear terms and must be solved using **Non-Linear Programming (NLP)**.
-
----
-layout: 'default'
----
-
-# Assumption 3: Divisibility
-
-### Definition
-*   Decision variables are allowed to take any value, including non-integer (fractional) values, that satisfies the constraints.
-*   Assumes that activities can be run at fractional levels.
-
-### Example (Wyndor Glass Co.)
-*   The decision variables represent **production rates** (e.g., number of batches produced *per week*).
-*   A production rate can be fractional (e.g., $x_1 = 2.5$ batches/week).
-*   Therefore, the assumption holds in this context.
-
-### What If It's Violated?
-*   This occurs if some or all decision variables *must* be integers (e.g., you cannot build 0.5 airplanes or assign 0.5 employees).
-*   The model becomes an **Integer Programming (IP)** model.
-
----
-layout: 'default'
----
-
-# Assumption 4: Certainty
-
-### Definition
-* All parameter values in the model—objective function coefficients ($c_j$), constraint coefficients ($a_{ij}$), and right-hand-side values ($b_i$)—are assumed to be known, exact constants.
-
-### Reality
-* In practice, this assumption is rarely met perfectly.
-* LP models often use predictions about the future, which inherently involves uncertainty.
-
-### How to Handle?
-* After finding a solution, it is crucial to perform **Sensitivity Analysis**.
-* This analysis identifies "sensitive parameters"—those whose values cannot change without changing the optimal solution.
-* If uncertainty is very high, other methods may be required.
-
----
-layout: 'default'
----
-
-# The Assumptions in Perspective
-
-*   **Models are Idealizations, Not Reality**
-    *   Assumptions are necessary to make the problem **tractable** (solvable).
-
-*   **Minor Violations are Common**
-    *   In practice, assumptions are rarely met perfectly, which is often acceptable.
-
-*   **The Goal is "Reasonable Approximation"**
-    *   The model's predictions just need to correlate well with the real world.
-
-*   **Serious Violations Require New Models**
-    *   If assumptions are badly broken, LP is not the right tool.
-    *   Consider using Non-Linear or Integer Programming instead.
-
----
-layout: 'default'
----
-
-<div style="transform: scale(0.57); top: -240px; position: relative;">
-
-```python
-import gurobipy as gp
-from gurobipy import GRB
-
-costs = {
-    'Shift_1': 170, 'Shift_2': 160, 'Shift_3': 175, 'Shift_4': 180, 'Shift_5': 195
-}
-
-min_needed = {
-    (6, 8): 48, (8, 10): 79, (10, 12): 65, (12, 14): 87, (14, 16): 64,
-    (16, 18): 73, (18, 20): 82, (20, 22): 43, (22, 24): 52, (0, 6): 15
-}
-
-shift_coverage = {
-    'Shift_1': [(6, 8), (8, 10), (10, 12), (12, 14)],
-    'Shift_2': [(8, 10), (10, 12), (12, 14), (14, 16)],
-    'Shift_3': [(12, 14), (14, 16), (16, 18), (18, 20)],
-    'Shift_4': [(16, 18), (18, 20), (20, 22), (22, 24)],
-    'Shift_5': [(22, 24), (0, 6)]
-}
-
-m = gp.Model("PersonnelScheduling")
-
-shifts = list(costs.keys())
-x = m.addVars(shifts, vtype=GRB.INTEGER, name="agents")
-
-m.setObjective(gp.quicksum(costs[j] * x[j] for j in shifts), GRB.MINIMIZE)
-
-for (start, end), needed in min_needed.items():
-    covering_shifts = []
-    for shift, intervals in shift_coverage.items():
-        if (start, end) in intervals:
-            covering_shifts.append(shift)
-    
-    m.addConstr(
-        gp.quicksum(x[j] for j in covering_shifts) >= needed, 
-        name=f"Time_{start}_{end}"
-    )
-
-m.optimize()
-
-print(f"cost: ${m.ObjVal:.2f}")
-for j in shifts:
-    if x[j].X > 0.001:
-        print(f"  {j}: {int(x[j].X)}")
-
-# cost: $30610.00
-#   Shift_1: 48
-#   Shift_2: 31
-#   Shift_3: 39
-#   Shift_4: 43
-#   Shift_5: 15
-```
+</div>
 
 </div>
 
 ---
-layout: 'default'
+layout: default
 ---
 
-<div style="transform: scale(0.6); top: -180px; position: relative;">
+# Network Terminology & Components
 
-```python
-import gurobipy as gp
-from gurobipy import GRB
+<div class="grid grid-cols-2 gap-10 text-lg">
 
-lanes, costs, capacities = gp.multidict({
-    ('F1', 'F2'): (2, 10),
-    ('F1', 'DC'): (4, float('inf')),
-    ('F1', 'W1'): (9, float('inf')),
-    ('F2', 'DC'): (3, float('inf')),
-    ('DC', 'W2'): (1, 80),
-    ('W1', 'W2'): (3, float('inf')),
-    ('W2', 'W1'): (2, float('inf'))
-})
+<div>
 
-demand = {
-    'F1': 50, 'F2': 40, 'DC': 0, 'W1': -30, 'W2': -60
-}
+### Basic Components
+* **Network:** A collection of points and lines connecting them.
+* **Nodes (Vertices):** The points or circles in the graph.
+* **Arcs (Links/Edges):** The lines connecting the nodes.
 
-nodes = list(demand.keys())
+### Arc Classification
+* **Directed Arc:** Flow allowed in only one direction.
+* **Undirected Link:** Flow allowed in either direction.
+    * *Note: Often analyzed as net flow in one specific direction.*
 
-m = gp.Model("DistributionNetwork")
+</div>
 
-x = m.addVars(lanes, obj=costs, ub=capacities, name="ship")
+<div>
 
-m.ModelSense = GRB.MINIMIZE
+### Paths & Connectivity
+* **Path:** A distinct sequence of arcs connecting two nodes.
+* **Cycle:** A path where the starting node and ending node are the same.
+* **Connected Network:** An undirected path exists between every pair of nodes.
+* **Spanning Tree:** A connected subgraph containing all $n$ nodes with no cycles.
 
-m.addConstrs(
-    (x.sum(i, '*') - x.sum('*', i) == demand[i] for i in nodes),
-    name="NetFlow"
-)
+</div>
 
-m.optimize()
+</div>
 
-print(f"cost: ${m.ObjVal * 100:.2f}")
-for i, j in lanes:
-    if x[i, j].X > 0.001:
-        print(f"  {i} -> {j}: {x[i, j].X} ")
+---
+layout: default
+---
 
-# cost: $49000.00
-  # F1 -> DC: 40.0
-  # F1 -> W1: 10.0
-  # F2 -> DC: 40.0
-  # DC -> W2: 80.0
-  # W2 -> W1: 20.0
+### Case Study: Seervada Park
 
-```
+<div class="grid grid-cols-2 gap-6 items-center h-[85%]">
+
+<div class="text-base leading-tight">
+
+#### Context
+* **Rule:** No private cars; Trams & Jeeps only.
+* **Nodes:** 
+  * **O:** Entrance | **T:** Scenic Wonder
+  * **A-E:** Intermediate Stations
+* **Edges:** Distance in miles.
+
+#### 3 Management Problems
+
+1. **Route Planning** (Shortest Path)
+   * *Goal:* Best route from Entrance (O) to Destination (T).
+
+2. **Telephone Lines** (Min. Spanning Tree)
+   * *Goal:* Connect all stations with min. cable length.
+
+3. **Peak Transport** (Max Flow)
+   * *Goal:* Maximize daily trips within road capacity.
+
+</div>
+
+<div class="flex justify-center h-full">
+  <img 
+    src="./assets/942eb9c4-9696-4b5d-a4c2-e0dd9a4da510.png" 
+    class="object-contain max-h-full rounded-lg shadow-md"
+  />
+</div>
+
+</div>
+
+---
+layout: default
+---
+
+# Problem 1: The Shortest-Path Problem
+
+<div class="grid grid-cols-2 gap-10 pt-5 text-lg">
+
+<div>
+
+### Problem Definition
+* **Objective:** Find the path with the **minimum total distance**.
+* **Scope:** From **Origin** to **Destination**.
+* **Context:** In a connected, undirected network.
+
+### Algorithm Logic (Dijkstra)
+* **Concept:** "Fan out" from the origin.
+* **Process:** Solve for the nearest node, then the second nearest, and so on.
+
+</div>
+
+<div>
+
+### The Iteration Process
+* **Goal of $n$-th Iteration:** Find the $n$-th nearest node to the origin.
+* **Candidates:** Unsolved nodes directly connected to **Solved Nodes**.
+* **Calculation:**
+  $$\text{Total Dist} = \text{Dist to Solved Node} + \text{Arc Length}$$
+* **Selection Rule:** Choose the candidate with the **minimum** total distance to become the next Solved Node.
+
+</div>
+
+</div>
+
+---
+layout: default
+---
+
+# Seervada Park: Shortest-Path Results
+
+<div class="grid grid-cols-2 gap-8 items-start">
+
+<div class="text-lg leading-relaxed">
+
+### Algorithm Execution (based on Table 10.2)
+* **n=1:** Start at **O** (Distance 0).
+* **n=2,3:** Find nearest neighbors **A** (Dist 2) and **C** / **B** (Dist 4).
+* **n=4:** Compare candidates. Find **E** (Dist 7) via path $B \rightarrow E$ (Total 4+3=7).
+* **Final Result:** Reach destination **T** with a minimum distance of **13 miles**.
+
+### Optimal Path Solutions
+Two shortest paths were found:
+1. `O → A → B → E → D → T`
+2. `O → A → B → D → T`
+
+</div>
+
+<div class="flex justify-center items-start h-full">
+  <!-- 
+    Image of Table 10.2 (Dijkstra's Algorithm Steps)
+    Found a public URL for the table.
+  -->
+  <img 
+    src="./assets/111.png" 
+    class="object-contain rounded-lg shadow-lg max-h-[500px]" 
+    alt="Table 10.2 - Shortest-Path Algorithm Steps"
+  />
+</div>
+
 </div>
