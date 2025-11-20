@@ -42,31 +42,22 @@ layout: default
 
 ### Last Week
 
-* **Paper:** *Path planning techniques for mobile robots: Review and prospect*
-* **Focus:** Understanding the core concepts of global vs. local planning (Chapter 2).
+* **Paper:** *A genetic algorithm for minimizing energy consumption in warehouses*
+* **Focus:** Understanding the basic concepts, core types, and main algorithms of path planning.
 
 <br/>
 
 ### This Week
 
 * **Paper:** *A genetic algorithm for minimizing energy consumption in warehouses*
-* **Focus:** Understanding the basic concepts, core types, and main algorithms of path planning.
+* **Focus:** Understanding Solution methodology and Numerical experiments.
 
 <br/>
 
 ### Next Week
 
-* **Paper:** *A genetic algorithm for minimizing energy consumption in warehouses*
-* **Focus:** Understanding Solution methodology and Numerical experiments.
-
----
-# 这是一个注释：你可以使用 'layout: default' 或 'layout: bullets'
-layout: default
----
-
-<div style="display: flex; justify-content: center">
-<img style="height: 450px; width: 650px " src="./assets/e765eb7d-6fab-4cf0-8280-8c342432003a.jpg">
-</div>
+* **Paper:** *A mixing algorithm of ACO and ABC for solving path planning of mobile robot*
+* **Focus:** Understanding the Grid environment model and Improved ACO-ABC algorithm.
 
 ---
 # 这是一个注释：使用 'layout: default' 布局
@@ -106,315 +97,371 @@ layout: default
 </div>
 
 ---
-# 这是一个注释：你可以使用 'layout: default' 或 'layout: bullets'
 layout: default
 ---
 
-## Research Background and Motivation
+# Solution Methodology
 
-<br/>
-<div class="grid grid-cols-3 gap-8">
+<div class="grid grid-cols-1 gap-4 mt-8 text-sm">
 
-<div>
-<h3 class="flex items-center">
-  1. Green Supply Chains Management
-</h3>
-
-*   **What is it?** GSCM means adding "green ideas" to the whole supply chain.
-*   **Where?** This includes product design, making things, warehousing, and delivery.
-*   **Why now?** Many companies and researchers now care about sustainability and our planet.
-</div>
-
-<div>
-<h3 class="flex items-center">
-  <i class="fa-solid fa-warehouse text-blue-600 mr-3"></i>
-  2. Green Warehousing
-</h3>
-
-*   **A Must-Do:** Because GSCM is important, warehouses must also be "green."
-*   **The Goal:** To reduce the bad effects on our environment.
-*   **The Role:** Warehouses are a key part of any supply chain.
-</div>
-
-<div>
-<h3 class="flex items-center">
-  <i class="fa-solid fa-user-check text-orange-600 mr-3"></i>
-  3. Customer Changes
-</h3>
-
-*   **New Needs:** Customers want things faster and more accurately. (e.g., from e-commerce)
-*   **New Thinking:** At the same time, customers are thinking more about green problems and sustainability.
-</div>
-
-</div>
-
----
-# 这是一个注释：使用 'layout: default' 布局
-layout: default
----
-
-# The Main Problem - Order Picking
-
-<div class="grid grid-cols-3 gap-8">
-
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：一个购物车 -->
-    <i class="fa-solid fa-cart-shopping text-blue-600 mr-3"></i>
-    1. Why Order Picking?
-  </h2>
-
-  * **What is it?** Getting items from shelves for customers.
-  * **Key Points:**
-      * In manual warehouses: It needs the most **workers**.
-      * In auto warehouses: It costs the most **money**.
-  * **The Big Problem:** It uses the most time and **the most energy**.
-</div>
-
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：一个放大镜，表示研究 -->
-    <i class="fa-solid fa-magnifying-glass-chart text-orange-600 mr-3"></i>
-    2. Old Studies
-  </h2>
-
-  * **Old Goal:** Most studies tried to make it faster (time) or cheaper (cost).
-  * **What they missed:** They did not study **energy use**.
-</div>
-
-<div>
-  <h2 class="flex items-center">
-    <!-- 图S标：一个靶心，表示目标 -->
-    <i class="fa-solid fa-bullseye text-green-600 mr-3"></i>
-    3. Our Study
-  </h2>
-
-  * **New Idea:** We want to **use less energy** (not just less time).
-  * **How?** We use a "Genetic Algorithm" (GA) to find the best way.
-  * **How?:** How we store items on the shelves is also very important.
-</div>
-
-</div>
-
----
-# 这是一个注释：使用 'layout: default' 布局
-layout: default
----
-
-# Literature review
-
-<div class="grid gap-12">
-
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：一个时钟 -->
-    <i class="fa-solid fa-clock text-blue-600 mr-3"></i>
-    Main Goal of Old Studies
-  </h2>
-
-  <p class="mb-4">Most studies tried to make warehouse operations <strong>faster (less time)</strong> or <strong>cheaper (less cost)</strong>.</p>
-
-  <ul class="list-disc pl-6 space-y-2">
-    <li>
-      <strong></strong> Made a system to save travel <strong>distance and cost</strong>.
-    </li>
-    <li>
-      <strong></strong> Used GA to get the shortest <strong>travel distance</strong>.
-    </li>
-     <li>
-      <strong></strong> Used math to lower <strong>travel cost</strong>.
-    </li>
-    <li>
-      <strong></strong> Used simulation to study the <strong>picker's travel path</strong>.
-    </li>
-  </ul>
-
-</div>
-
-  <p>All these old papers only used <strong>time</strong>, <strong>distance</strong>, or <strong>cost</strong> to check if a solution was "good".</p>
-</div>
-
----
-# 这是一个注释：使用 'layout: default' 布局
-layout: default
----
-
-# Our Contribution
-
-<div class="grid grid-cols-2 gap-12">
-
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：一片叶子 -->
-    <i class="fa-solid fa-leaf text-green-600 mr-3"></i>
-    1. Focus on "Green" Studies
-  </h2>
-
-  <p class="mb-4">Not many papers talk about "green" or "sustainable" warehouses.</p>
-
-  <ul class="list-disc pl-6 space-y-2">
-    <li>
-      <strong></strong> Talked about green order picking methods.
-    </li>
-    <li>
-      <strong></strong> Studied energy use in <strong>automated</strong> (robot) warehouses.
-    </li>
-     <li>
-      <strong></strong> Measured CO2 savings with a computer simulation.
-    </li>
-  </ul>
-
-</div>
-
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：一个灯泡，代表新想法 -->
-    <i class="fa-solid fa-lightbulb text-yellow-500 mr-3"></i>
-    2. New algorithm
-  </h2>
-
-  <ul class="list-disc pl-6 space-y-2">
-    <li>
-      <strong>It's Different:</strong> We study <strong>"picker-to-part"</strong> (manual) warehouses.
-    </li>
-    <li>
-      <strong>Our Goal:</strong> We want to <strong>minimize energy use</strong>.
-    </li>
-    <li>
-      <strong>Our Method:</strong> We use a Genetic Algorithm (GA) to solve two problems at once:
-        <br/>
-        - 1. Order <strong>Batching</strong> (grouping orders)
-        <br/>
-        - 2. <strong>Routing</strong> (finding the best path)
-    </li>
+<div class="p-4 bg-blue-50 border-l-4 border-blue-600 rounded">
+  <h3 class="text-base font-bold text-blue-800 mb-2">Basics of Genetic Algorithms</h3>
+  <ul class="list-disc pl-4 space-y-1 leading-snug text-gray-700">
+    <li>"Search algorithms based on <strong>natural selection and genetics</strong>".</li>
+    <li>"Founds on a <strong>population of candidate solutions</strong> differently from traditional search methods".</li>
+    <li>Key Requirements: "<strong>Encoding</strong> the potential solutions and defining the <strong>fitness function</strong>".</li>
   </ul>
 </div>
 
-</div>
----
-# 这是一个注释：使用 'layout: default' 布局
-layout: default
----
-
-# The Problem (System & Layout)
-
-<div class="grid grid-cols-2 gap-12">
-
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：叉车 -->
-    <i class="fa-solid fa-truck-forklift text-orange-600 mr-3"></i>
-    1. System Setup
-  </h2>
-
-  <ul class="list-disc pl-6 space-y-2">
-    <li v-clicks>
-      <strong>System Type:</strong> Manual warehousing.
-    </li>
-    <li v-clicks>
-      It's a <strong>"Picker-to-part"</strong>
-    </li>
-    <li v-clicks>
-      <strong>How it works:</strong>
-      <ul class="list-circle pl-6 mt-1">
-        <li>Pickers follow an "order pick list".</li>
-        <li>They drive a <strong>forklift</strong>.</li>
-        <li>The trip starts at the "I/O point".</li>
-      </ul>
-    </li>
-    <li v-clicks>
-      <strong>Key Strategy:</strong> Order <strong>Batching</strong>.
-      This means they group many orders into one trip.
-    </li>
-  </ul>
-
-</div>
-
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：网格布局 -->
-    <i class="fa-solid fa-table-cells-large text-blue-600 mr-3"></i>
-    2. Warehouse Layout
-  </h2>
-
-  <ul class="list-disc pl-6 space-y-2">
-    <li v-clicks>
-      <strong>Structure:</strong> 12 shelves, 13 picking aisles.
-    </li>
-    <li v-clicks>
-      <strong>Details:</strong> 4 layers and 2 sides on each shelf.
-    </li>
-    <li v-clicks>
-      <strong>Total:</strong> 2400 storage locations.
-    </li>
-    <li v-clicks>
-      <strong>Key Sizes:</strong>
-      <ul class="list-circle pl-6 mt-1">
-        <li>Aisle Length: 62.5 m</li>
-        <li>Aisle Width: 5 m</li>
-        <li>Shelf Width: 2 m</li>
-        <li>Space (horizontal): 2.5 m</li>
-        <li>Space (vertical): 1.5 m</li>
-      </ul>
-    </li>
-  </ul>
-</div>
-
-</div>
-
----
-# 这是一个注释：使用 'layout: default' 布局
-layout: default
----
-
-# The Problem (Key Numbers)
-
-<div class="grid grid-cols-3 gap-8">
-
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：速度计 -->
-    <i class="fa-solid fa-gauge-high text-blue-600 mr-3"></i>
-    1. Forklift Speeds
-  </h2>
-  <p>We use these numbers to build our energy model.</p>
-  <ul class="list-disc pl-6 mt-4 space-y-2">
-    <li>Horizontal Speed: <br/> <strong class="text-2xl">10 km/h</strong></li>
-    <li class="mt-4">Vertical Speed: <br/> <strong class="text-2xl">0.53 km/h</strong></li>
-  </ul>
-</div>
-
-<div>
-  <h2 class="flex items-center">
-    <!-- 图标：星星 -->
-    <i class="fa-solid fa-star text-yellow-500 mr-3"></i>
-    2. The Key Insight
-  </h2>
-  <p class="mt-4">
-    Driving side-to-side (10 km/h) is
+<div class="p-4 bg-green-50 border-l-4 border-green-600 rounded">
+  <h3 class="text-base font-bold text-green-800 mb-2">Chromosome Encoding</h3>
+  <p class="mb-3 text-gray-700">
+    "Encoded through a string composed of orders locations".
   </p>
-  <p class="text-5xl font-bold my-6 text-center text-red-600">
-    ~19x
-  </p>
-  <p>
-    <strong>faster</strong> than lifting the fork up-and-down (0.53 km/h).
-  </p>
+  
+  <div class="grid grid-cols-[80px_1fr] gap-2 text-gray-800">
+    <span class="font-bold text-right mr-2">Gene:</span>
+    <span>"Represents <strong>location numbers</strong> of the orders".</span>
+    <span class="font-bold text-right mr-2">Position:</span>
+    <span>"Represents <strong>batch number</strong> that the order belongs".</span>
+  </div>
+</div>
+
+</div>
+
+---
+layout: default
+---
+
+# Fitness Function & Energy Calculation
+
+<div class="flex flex-col gap-4 mt-6 text-sm">
+
+<!-- Objective Function Section -->
+<div class="p-4 bg-blue-50 border-l-4 border-blue-600 rounded shadow-sm">
+<h3 class="text-base font-bold text-blue-800 mb-1">Objective Function</h3>
+<p class="text-gray-700">
+The fitness function evaluates solution quality. The objective is <strong>minimizing total energy consumption</strong> for order picking.
+</p>
+</div>
+
+<!-- Energy Estimation Model Section -->
+<div class="p-4 bg-green-50 border-l-4 border-green-600 rounded shadow-sm">
+<h3 class="text-base font-bold text-green-800 mb-3">Energy Estimation Model</h3>
+  
+<div class="grid grid-cols-[1.5fr_1fr] gap-4">
+
+<!-- Variables Column -->
+<div>
+<p class="text-gray-700 mb-2">Calculated based on electric forklift data, considering:</p>
+
+<!-- 这里改用了 Markdown 列表，并用 div 包裹以应用样式 -->
+<div class="text-gray-800 leading-tight pl-4">
+
+- $Dis_h$ / $Dis_v$: Horizontal / Vertical travel distance
+- $v_h$ / $v_v$: Horizontal / Vertical speed of forklift
+- $uc_e$: Unit energy consumption ($uc_e$)
+
+</div>
+</div>
+
+<!-- Formula Column -->
+<div class="flex flex-col justify-center items-center bg-white rounded border border-green-200 p-3 shadow-inner">
+<div class="text-[10px] text-gray-500 font-mono mb-1 uppercase tracking-wider">Calculation Formula</div>
+<div class="text-base text-gray-900 py-2">
+
+$$
+E = \left[ \frac{Dis_h}{v_h} + \frac{Dis_v}{v_v} \right] \times uc_e
+$$
+
+</div>
+</div>
+    
+</div>
+</div>
+
+</div>
+
+---
+layout: default
+---
+
+# Genetic Operators
+
+<div class="grid grid-cols-3 gap-6 mt-10 text-sm">
+
+<!-- Selection Operator -->
+<div class="bg-red-50 p-5 rounded border-t-4 border-red-500 shadow-sm">
+<h3 class="text-lg font-bold text-red-800 mb-3">1. Selection</h3>
+<p class="font-bold text-gray-700 mb-2">Roulette Wheel Selection</p>
+<p class="text-gray-600 leading-relaxed">
+Chromosomes with higher fitness have a greater chance of being selected for the next generation.
+</p>
+</div>
+
+<!-- Crossover Operator -->
+<div class="bg-blue-50 p-5 rounded border-t-4 border-blue-500 shadow-sm">
+<h3 class="text-lg font-bold text-blue-800 mb-3">2. Crossover</h3>
+<p class="font-bold text-gray-700 mb-2">Reverse Action Crossover</p>
+<p class="text-gray-600 leading-relaxed mb-3">
+Randomly select two cut-points and reverse the gene sequence between them to generate a new chromosome.
+</p>
+<div class="text-xs text-blue-700 font-mono bg-blue-100 inline-block px-2 py-1 rounded border border-blue-200">
+Goal: Exploit search space
+</div>
+</div>
+
+<!-- Mutation Operator -->
+<div class="bg-green-50 p-5 rounded border-t-4 border-green-500 shadow-sm">
+<h3 class="text-lg font-bold text-green-800 mb-3">3. Mutation</h3>
+<p class="font-bold text-gray-700 mb-2">Swap Mutation</p>
+<p class="text-gray-600 leading-relaxed mb-3">
+Randomly select two genes and swap their positions.
+</p>
+<div class="text-xs text-green-700 font-mono bg-green-100 inline-block px-2 py-1 rounded border border-green-200">
+Goal: Explore search space
+</div>
+</div>
+
+</div>
+
+---
+layout: default
+---
+
+# Experimental Setup & Performance
+
+<!-- 这里的 h-[400px] 限制了内容区域高度，防止撑满全屏 -->
+<div class="grid grid-cols-2 gap-5 mt-4 text-sm">
+
+<!-- Left Column -->
+<div class="flex flex-col gap-4">
+
+<!-- Box 1: Environment -->
+<div class="p-3 bg-blue-50 border-l-4 border-blue-600 rounded shadow-sm">
+<h3 class="font-bold text-blue-800 mb-1 text-base">Experimental Environment</h3>
+<ul class="list-disc pl-4 space-y-1 text-gray-700 leading-snug">
+<li><strong>Storage Policy:</strong> Adopts Class-based storage policy (reduces travel distance).</li>
+<li><strong>Implementation:</strong> C# programming language in Microsoft Visual Studio.</li>
+</ul>
+</div>
+
+<!-- Box 2: Parameters (表格更紧凑) -->
+<div class="p-3 bg-white border border-gray-200 rounded shadow-sm flex-grow">
+<h3 class="font-bold text-gray-800 mb-2 border-b pb-1 text-base">Parameter Settings</h3>
+<table class="w-full text-left border-collapse text-xs">
+<tr class="border-b border-gray-100"><td class="py-1 text-gray-600">Population Size</td><td class="font-mono text-blue-700 text-right">125</td></tr>
+<tr class="border-b border-gray-100"><td class="py-1 text-gray-600">Crossover Rate</td><td class="font-mono text-blue-700 text-right">0.7</td></tr>
+<tr class="border-b border-gray-100"><td class="py-1 text-gray-600">Mutation Rate</td><td class="font-mono text-blue-700 text-right">0.008</td></tr>
+<tr><td class="py-1 text-gray-600">Elitism Rate</td><td class="font-mono text-blue-700 text-right">0.04</td></tr>
+</table>
+</div>
+
+</div>
+
+<!-- Right Column: Results (间距缩小) -->
+<div class="p-4 bg-green-50 border-l-4 border-green-600 rounded shadow-sm">
+<h3 class="font-bold text-green-800 mb-3 text-base">Convergence & Termination</h3>
+
+<div class="space-y-3">
+  <div>
+    <p class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-0.5">Convergence Behavior</p>
+    <p class="text-gray-700 leading-snug">
+      The algorithm shows <strong>rapid fitness improvement</strong> in early iterations before stabilizing.
+    </p>
+  </div>
+
+  <div>
+    <p class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-0.5">Termination Condition</p>
+    <p class="text-gray-700 leading-snug">
+      Stops if fitness improvement is <strong>< 0.001</strong> over <strong>200 iterations</strong>.
+    </p>
+  </div>
+
+  <div>
+    <p class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-0.5">Performance Result</p>
+    <p class="text-gray-700 leading-snug">
+      Provides effective solutions in <strong>short CPU times</strong> even for large-scale datasets.
+    </p>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+---
+layout: default
+---
+
+# Comparative Results: GA vs. FCFS
+
+<div class="grid grid-cols-2 gap-6 mt-6 text-sm">
+
+<!-- Left Column: Comparison & Trends -->
+<div class="flex flex-col gap-5">
+
+<!-- Benchmark Section -->
+<div class="p-4 bg-blue-50 border-l-4 border-blue-600 rounded shadow-sm">
+<h3 class="font-bold text-blue-800 mb-2">Benchmark Strategy</h3>
+<p class="text-gray-700 leading-snug">
+Comparison between the proposed <strong>Genetic Algorithm (GA)</strong> and the traditional <strong>First-Come-First-Served (FCFS)</strong> strategy.
+</p>
+</div>
+
+<!-- Findings Section -->
+<div class="p-4 bg-white border border-gray-200 rounded shadow-sm flex-grow">
+<h3 class="font-bold text-gray-800 mb-3 border-b pb-2">Experimental Findings</h3>
+<ul class="list-disc pl-4 space-y-3 text-gray-700 leading-snug">
+<li>
+<strong>Consistent Reduction:</strong><br>
+GA energy consumption is significantly lower than FCFS across all datasets (DS1 - DS10).
+</li>
+<li>
+<strong>Scaling Efficiency:</strong><br>
+Energy savings become more pronounced as the <strong>number of orders increases</strong>.
+</li>
+</ul>
+</div>
+
+</div>
+
+<!-- Right Column: Quantified Benefits -->
+<div class="flex flex-col gap-5">
+
+<div class="p-5 bg-green-50 border-l-4 border-green-600 rounded shadow-sm h-full flex flex-col justify-center">
+<h3 class="font-bold text-green-800 mb-6">Quantified Benefits</h3>
+
+<!-- Stat Highlight -->
+<div class="bg-white p-6 rounded-lg border border-green-100 shadow-inner text-center mb-6">
+<p class="text-xs text-gray-500 uppercase tracking-widest mb-2">Annual Energy Saving Rate</p>
+<p class="text-5xl font-bold text-green-600 mb-2">~23.5%</p>
+<p class="text-xs text-gray-400">*Based on Low Order Rate (40 orders/h)</p>
+</div>
+
+<!-- Impact Statement -->
+<div>
+<p class="font-bold text-gray-700 mb-1">Global Potential</p>
+<p class="text-gray-600 leading-snug">
+Demonstrates significant potential for large-scale energy conservation in warehouse operations globally.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: default
+---
+
+# Batch Size & Sensitivity Analysis
+
+<div class="grid grid-cols-2 gap-4 mt-2 text-sm">
+
+<div class="flex flex-col gap-2">
+
+<div class="p-3 bg-blue-50 border-l-4 border-blue-600 rounded shadow-sm">
+<h4 class="font-bold text-blue-800 mb-1 text-base">Experiment Setup</h4>
+<p class="text-gray-700 leading-snug text-xs">
+Tested the effect of different <strong>batch sizes (1 to 6)</strong> on total energy consumption using dataset DS3.
+</p>
+</div>
+
+<div class="p-3 bg-white border border-gray-200 rounded shadow-sm flex-grow">
+<h4 class="font-bold text-gray-800 mb-2 border-b pb-1 text-base">Key Findings</h4>
+<ul class="list-disc pl-4 space-y-2 text-gray-700 leading-snug text-xs">
+<li>
+<strong>Significant Impact:</strong><br>
+Batch size has a reasonable and significant effect on total energy consumption.
+</li>
+<li>
+<strong>Optimal Size:</strong><br>
+Minimum energy consumption is achieved at <strong>Batch Size = 2</strong> in this warehouse setting.
+</li>
+<li>
+<strong>Trend:</strong><br>
+Energy consumption <strong>increases</strong> as batch size grows beyond 2.
+</li>
+</ul>
+</div>
+
+</div>
+
+<div class="p-4 bg-green-50 border-l-4 border-green-600 rounded shadow-sm h-full">
+<h3 class="font-bold text-green-800 mb-4 text-base">Warehouse Scalability</h3>
+
+<div class="space-y-5">
+<div>
+<p class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-1">Test Scenarios</p>
+<p class="text-gray-700 leading-snug text-xs">
+Algorithm was tested on warehouses with varying characteristics, ranging from <strong>1200 to 2800 storage locations</strong>.
+</p>
 </div>
 
 <div>
-  <h2 class="flex items-center">
-    <!-- 图标：路径 -->
-    <i class="fa-solid fa-route text-green-600 mr-3"></i>
-    3. What This Means
-  </h2>
-  <ul class="list-disc pl-6 mt-4 space-y-2">
-    <li>
-      <strong>The Real Problem:</strong> Moving <strong>up-and-down</strong> is the operation that uses the most time and energy.
-    </li>
-    <li class="mt-4">
-      <strong>How to Save Energy:</strong> A good path (routing) must be smart. It must try to reduce the up-and-down travel.
-    </li>
-  </ul>
+<p class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-1">Adaptability Result</p>
+<p class="text-gray-700 leading-snug text-xs">
+While energy consumption increases slightly with warehouse size, the algorithm <strong>remains effective</strong> across all configurations.
+</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+---
+layout: default
+---
+
+# Conclusions
+
+<div class="grid grid-cols-3 gap-5 mt-8 text-sm">
+
+<div class="p-4 bg-blue-50 border-l-4 border-blue-600 rounded shadow-sm">
+<h3 class="font-bold text-blue-800 mb-3 text-base">Research Summary</h3>
+<ul class="list-disc pl-4 space-y-3 text-gray-700 leading-snug">
+<li>
+<strong>Energy Focus:</strong><br>
+Unlike previous studies on time or distance, this study focuses on <strong>minimizing energy consumption</strong> in manual warehouses.
+</li>
+<li>
+<strong>Green Integration:</strong><br>
+Integrates environmental thinking into warehouse operations management.
+</li>
+</ul>
+</div>
+
+<div class="p-4 bg-green-50 border-l-4 border-green-600 rounded shadow-sm">
+<h3 class="font-bold text-green-800 mb-3 text-base">Main Contributions</h3>
+<ul class="list-disc pl-4 space-y-3 text-gray-700 leading-snug">
+<li>
+<strong>Algorithm Development:</strong><br>
+Developed a Genetic Algorithm that combines <strong>order batching</strong> and <strong>routing optimization</strong>.
+</li>
+<li>
+<strong>Performance:</strong><br>
+Proven to have <strong>high computational efficiency</strong> and is adaptable to different types of warehouses.
+</li>
+</ul>
+</div>
+
+<div class="p-4 bg-purple-50 border-l-4 border-purple-600 rounded shadow-sm">
+<h3 class="font-bold text-purple-800 mb-3 text-base">Future Directions</h3>
+<p class="text-gray-700 leading-snug mb-2">
+Design a comprehensive <strong>Decision Support System</strong> integrating:
+</p>
+<ul class="list-disc pl-4 space-y-1 text-gray-700 text-xs mb-3">
+<li>Storage Assignment</li>
+<li>Order Batching</li>
+<li>Routing Optimization</li>
+</ul>
+<p class="text-gray-700 leading-snug">
+<strong>Goal:</strong> Achieve environmentally sustainable warehouse operations.
+</p>
 </div>
 
 </div>
