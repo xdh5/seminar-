@@ -19,7 +19,7 @@ drawings:
 mdc: true
 ---
 
-## A genetic algorithm for minimizing energy consumption in warehouses
+## A mixing algorithm of ACO and ABC for solving path planning of mobile robot
 
 <div class="mt-12 py-1" hover:bg="white op-10">
   Zhao Zhiyu
@@ -43,425 +43,399 @@ layout: default
 ### Last Week
 
 * **Paper:** *A genetic algorithm for minimizing energy consumption in warehouses*
-* **Focus:** Understanding the basic concepts, core types, and main algorithms of path planning.
+* **Focus:** Understanding Solution methodology and Numerical experiments.
 
 <br/>
 
 ### This Week
 
-* **Paper:** *A genetic algorithm for minimizing energy consumption in warehouses*
-* **Focus:** Understanding Solution methodology and Numerical experiments.
+* **Paper:** *A mixing algorithm of ACO and ABC for solving path planning of mobile robot*
+* **Focus:** Understanding the Grid environment model and Improved ACO-ABC algorithm.
 
 <br/>
 
 ### Next Week
 
 * **Paper:** *A mixing algorithm of ACO and ABC for solving path planning of mobile robot*
-* **Focus:** Understanding the Grid environment model and Improved ACO-ABC algorithm.
+* **Focus:** Understanding the Experiments and numerical analysis.
 
 ---
 # 这是一个注释：使用 'layout: default' 布局
 layout: default
 ---
 
-# Table of Contents
+<div style="display: flex; justify-content: center">
+<img style="height: 450px; width: 650px " src="./assets/e765eb7d-6fab-4cf0-8280-8c342432003a.jpg">
+</div>
 
-<div class="grid grid-cols-2 gap-10">
+---
+layout: center
+---
 
-<div>
+<div class="w-full max-w-6xl mx-auto">
 
-* <strong class="text-xl">1. Introduction</strong>
-    <br><span class="opacity-75">Why we study this problem (the "green" goal).</span>
+<h1 class="text-5xl font-bold mb-16 text-center text-blue-900">Table of Contents</h1>
 
-* <strong class="text-xl">2. Literature review</strong>
-    <br><span class="opacity-75">What old studies did vs. our new idea.</span>
+<div class="grid grid-cols-2 gap-x-20 gap-y-12 w-full px-8">
 
-* <strong class="text-xl">3. Problem description</strong>
-    <br><span class="opacity-75">The warehouse layout and forklift speeds.</span>
+  <div class="flex items-center border-l-4 border-gray-300 pl-4">
+    <span class="text-4xl font-bold text-gray-300 mr-4">01</span>
+    <span class="text-2xl font-bold text-gray-800">Introduction</span>
+  </div>
 
-* <strong class="text-xl">4. Solution methodology</strong>
-    <br><span class="opacity-75">How our Genetic Algorithm (GA) works.</span>
+  <div class="flex items-center border-l-4 border-gray-300 pl-4">
+    <span class="text-4xl font-bold text-gray-300 mr-4">02</span>
+    <span class="text-2xl font-bold text-gray-800">Mathematical Model of Path Planning</span>
+  </div>
+
+  <div class="flex items-center border-l-4 border-gray-300 pl-4">
+    <span class="text-4xl font-bold text-gray-300 mr-4">03</span>
+    <span class="text-2xl font-bold text-gray-800">Improved ACO-ABC Algorithm</span>
+  </div>
+
+  <div class="flex items-center border-l-4 border-gray-300 pl-4">
+    <span class="text-4xl font-bold text-gray-300 mr-4">04</span>
+    <span class="text-2xl font-bold text-gray-800">Experiments & Numerical Analysis</span>
+  </div>
+
+  <div class="flex items-center border-l-4 border-gray-300 pl-4">
+    <span class="text-4xl font-bold text-gray-300 mr-4">05</span>
+    <span class="text-2xl font-bold text-gray-800">Discussion</span>
+  </div>
+
+  <div class="flex items-center border-l-4 border-gray-300 pl-4">
+    <span class="text-4xl font-bold text-gray-300 mr-4">06</span>
+    <span class="text-2xl font-bold text-gray-800">Conclusion</span>
+  </div>
 
 </div>
 
-<div>
-
-* <strong class="text-xl">5. Numerical experiments</strong>
-    <br><span class="opacity-75">Testing the GA and showing the results.</span>
-
-* <strong class="text-xl">6. Conclusions</strong>
-    <br><span class="opacity-75">What we learned and what to do next.</span>
-
 </div>
 
+---
+layout: two-cols
+---
+
+# Research Objective & Modeling
+
+### 1. Research Objective
+To find an **optimal and collision-free path** for a mobile robot within the workspace.
+
+### 2. Environment Modeling
+Adopting the **Grid Method** to model the space. The environment is divided into a grid map:
+
+* ⬛ **Black Grid**: Represents an **Obstacle**.
+* ⬜ **White Grid**: Represents a **Free area**.
+* 🟥 **S**: Represents the **Start point**.
+* 🟦 **T**: Represents the **Target point**.
+
+::right::
+
+<div class="flex flex-col items-center justify-center h-full ml-4">
+  <div class="border-2 border-dashed border-gray-400 rounded-lg p-6 w-full h-80 flex items-center justify-center bg-gray-50">
+    <img 
+      src="./assets/fig1.png" 
+      class="max-h-full max-w-full object-contain" 
+      alt="Fig. 1. Space environment model"
+    />
+  </div>
 </div>
 
 ---
 layout: default
 ---
 
-# Solution Methodology
+# Research Background & Motivation
 
-<div class="grid grid-cols-1 gap-4 mt-8 text-sm">
+### Why combine ACO and ABC?
 
-<div class="p-4 bg-blue-50 border-l-4 border-blue-600 rounded">
-  <h3 class="text-base font-bold text-blue-800 mb-2">Basics of Genetic Algorithms</h3>
-  <ul class="list-disc pl-4 space-y-1 leading-snug text-gray-700">
-    <li>"Search algorithms based on <strong>natural selection and genetics</strong>".</li>
-    <li>"Founds on a <strong>population of candidate solutions</strong> differently from traditional search methods".</li>
-    <li>Key Requirements: "<strong>Encoding</strong> the potential solutions and defining the <strong>fitness function</strong>".</li>
+<div class="grid grid-cols-2 gap-16 mt-12">
+
+<div>
+  <h4 class="text-2xl text-blue-800 font-bold mb-6 border-b-2 border-blue-200 pb-2">
+    Ant Colony Optimization (ACO)
+  </h4>
+  <div class="space-y-6 text-gray-700">
+    <div>
+      <span class="font-bold text-green-700 text-lg block mb-1">Pros</span>
+      <span>Strong robustness.</span>
+    </div>
+    <div>
+      <span class="font-bold text-red-700 text-lg block mb-1">Cons</span>
+      <span>Slow convergence speed, blindness in the early search stage, and easy to fall into local optima.</span>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h4 class="text-2xl text-yellow-700 font-bold mb-6 border-b-2 border-yellow-200 pb-2">
+    Artificial Bee Colony (ABC)
+  </h4>
+  <div class="space-y-6 text-gray-700">
+    <div>
+      <span class="font-bold text-green-700 text-lg block mb-1">Pros</span>
+      <span>High search efficiency and fast convergence speed.</span>
+    </div>
+    <div>
+      <span class="font-bold text-red-700 text-lg block mb-1">Cons</span>
+      <span>Early convergence and poor initial path planning effect.</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="mt-16 text-center">
+  <p class="text-xl text-gray-800 bg-gray-50 py-4 rounded-lg border border-gray-200">
+    <span class="font-bold text-primary">Strategy:</span> Combine the advantages of both to propose the <b>IACO-IABC algorithm</b>.
+  </p>
+</div>
+
+---
+layout: two-cols
+---
+
+# IACO-IABC Hybrid Strategy
+
+<div class="mt-8 space-y-8">
+
+<div>
+  <h4 class="text-xl font-bold text-gray-800 mb-2">1. Phased Collaboration</h4>
+  <ul class="list-disc list-outside ml-5 space-y-4 text-gray-700">
+    <li>
+      <span class="font-bold text-blue-700">Global Search (ABC):</span>
+      <span>Uses improved ABC to quickly generate "Basic Nodes" of the path, determining the general direction.</span>
+    </li>
+    <li>
+      <span class="font-bold text-blue-700">Local Connection (ACO):</span>
+      <span>Uses improved ACO to find the optimal connection between these basic nodes.</span>
+    </li>
   </ul>
 </div>
 
-<div class="p-4 bg-green-50 border-l-4 border-green-600 rounded">
-  <h3 class="text-base font-bold text-green-800 mb-2">Chromosome Encoding</h3>
-  <p class="mb-3 text-gray-700">
-    "Encoded through a string composed of orders locations".
+<div>
+  <h4 class="text-xl font-bold text-gray-800 mb-2">2. Advantage</h4>
+  <p class="text-gray-700">
+    Utilizes ABC's global search capability and ACO's path optimization capability.
   </p>
-  
-  <div class="grid grid-cols-[80px_1fr] gap-2 text-gray-800">
-    <span class="font-bold text-right mr-2">Gene:</span>
-    <span>"Represents <strong>location numbers</strong> of the orders".</span>
-    <span class="font-bold text-right mr-2">Position:</span>
-    <span>"Represents <strong>batch number</strong> that the order belongs".</span>
+</div>
+
+</div>
+
+::right::
+
+<div class="flex flex-col items-center justify-center h-full ml-6">
+  <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 w-full h-96 flex items-center justify-center bg-gray-50">
+    <img 
+      src="./assets/fig9.png" 
+      class="max-h-full max-w-full object-contain" 
+      alt="Fig. 9. Basic process of the IACO-IABC algorithm"
+    />
   </div>
 </div>
 
-</div>
-
 ---
-layout: default
+layout: two-cols
 ---
 
-# Fitness Function & Energy Calculation
+### Improvement 1: ACO Heuristic Mechanism
 
-<div class="flex flex-col gap-4 mt-6 text-sm">
+#### Solving the "Blind Search" Problem
 
-<!-- Objective Function Section -->
-<div class="p-4 bg-blue-50 border-l-4 border-blue-600 rounded shadow-sm">
-<h3 class="text-base font-bold text-blue-800 mb-1">Objective Function</h3>
-<p class="text-gray-700">
-The fitness function evaluates solution quality. The objective is <strong>minimizing total energy consumption</strong> for order picking.
-</p>
-</div>
+<div class="mt-5 space-y-5">
 
-<!-- Energy Estimation Model Section -->
-<div class="p-4 bg-green-50 border-l-4 border-green-600 rounded shadow-sm">
-<h3 class="text-base font-bold text-green-800 mb-3">Energy Estimation Model</h3>
-  
-<div class="grid grid-cols-[1.5fr_1fr] gap-4">
-
-<!-- Variables Column -->
 <div>
-<p class="text-gray-700 mb-2">Calculated based on electric forklift data, considering:</p>
-
-<!-- 这里改用了 Markdown 列表，并用 div 包裹以应用样式 -->
-<div class="text-gray-800 leading-tight pl-4">
-
-- $Dis_h$ / $Dis_v$: Horizontal / Vertical travel distance
-- $v_h$ / $v_v$: Horizontal / Vertical speed of forklift
-- $uc_e$: Unit energy consumption ($uc_e$)
-
-</div>
+  <h4 class="text-xl font-bold text-red-800 mb-3 border-l-4 border-red-600 pl-4">
+    Traditional Problem
+  </h4>
+  <p class="text-gray-700 text-l leading-relaxed">
+    Traditional heuristic functions only consider the distance between the current node and the next node. This results in <b>weak guidance</b> and leads to blind searching.
+  </p>
 </div>
 
-<!-- Formula Column -->
-<div class="flex flex-col justify-center items-center bg-white rounded border border-green-200 p-3 shadow-inner">
-<div class="text-[10px] text-gray-500 font-mono mb-1 uppercase tracking-wider">Calculation Formula</div>
-<div class="text-base text-gray-900 py-2">
-
-$$
-E = \left[ \frac{Dis_h}{v_h} + \frac{Dis_v}{v_v} \right] \times uc_e
-$$
-
-</div>
-</div>
-    
-</div>
+<div>
+  <h4 class="text-xl font-bold text-green-800 mb-3 border-l-4 border-green-600 pl-4">
+    Improved Method
+  </h4>
+  <ul class="list-disc list-outside ml-6 space-y-0.1 text-gray-700 text-l leading-relaxed">
+    <li>
+      <span class="font-bold text-black">New Factors:</span> Incorporates <strong>Direction</strong> and <strong>Turning</strong> information into the function.
+    </li>
+    <li>
+      <span class="font-bold text-black">Geometric Context:</span> Considers the Start, Current, and Target positions simultaneously.
+    </li>
+    <li>
+      <span class="font-bold text-black">Goal:</span> Prioritizes nodes facing the target to reduce unnecessary turns.
+    </li>
+  </ul>
 </div>
 
 </div>
 
----
-layout: default
----
+::right::
 
-# Genetic Operators
-
-<div class="grid grid-cols-3 gap-6 mt-10 text-sm">
-
-<!-- Selection Operator -->
-<div class="bg-red-50 p-5 rounded border-t-4 border-red-500 shadow-sm">
-<h3 class="text-lg font-bold text-red-800 mb-3">1. Selection</h3>
-<p class="font-bold text-gray-700 mb-2">Roulette Wheel Selection</p>
-<p class="text-gray-600 leading-relaxed">
-Chromosomes with higher fitness have a greater chance of being selected for the next generation.
-</p>
-</div>
-
-<!-- Crossover Operator -->
-<div class="bg-blue-50 p-5 rounded border-t-4 border-blue-500 shadow-sm">
-<h3 class="text-lg font-bold text-blue-800 mb-3">2. Crossover</h3>
-<p class="font-bold text-gray-700 mb-2">Reverse Action Crossover</p>
-<p class="text-gray-600 leading-relaxed mb-3">
-Randomly select two cut-points and reverse the gene sequence between them to generate a new chromosome.
-</p>
-<div class="text-xs text-blue-700 font-mono bg-blue-100 inline-block px-2 py-1 rounded border border-blue-200">
-Goal: Exploit search space
-</div>
-</div>
-
-<!-- Mutation Operator -->
-<div class="bg-green-50 p-5 rounded border-t-4 border-green-500 shadow-sm">
-<h3 class="text-lg font-bold text-green-800 mb-3">3. Mutation</h3>
-<p class="font-bold text-gray-700 mb-2">Swap Mutation</p>
-<p class="text-gray-600 leading-relaxed mb-3">
-Randomly select two genes and swap their positions.
-</p>
-<div class="text-xs text-green-700 font-mono bg-green-100 inline-block px-2 py-1 rounded border border-green-200">
-Goal: Explore search space
-</div>
-</div>
-
-</div>
-
----
-layout: default
----
-
-# Experimental Setup & Performance
-
-<!-- 这里的 h-[400px] 限制了内容区域高度，防止撑满全屏 -->
-<div class="grid grid-cols-2 gap-5 mt-4 text-sm">
-
-<!-- Left Column -->
-<div class="flex flex-col gap-4">
-
-<!-- Box 1: Environment -->
-<div class="p-3 bg-blue-50 border-l-4 border-blue-600 rounded shadow-sm">
-<h3 class="font-bold text-blue-800 mb-1 text-base">Experimental Environment</h3>
-<ul class="list-disc pl-4 space-y-1 text-gray-700 leading-snug">
-<li><strong>Storage Policy:</strong> Adopts Class-based storage policy (reduces travel distance).</li>
-<li><strong>Implementation:</strong> C# programming language in Microsoft Visual Studio.</li>
-</ul>
-</div>
-
-<!-- Box 2: Parameters (表格更紧凑) -->
-<div class="p-3 bg-white border border-gray-200 rounded shadow-sm flex-grow">
-<h3 class="font-bold text-gray-800 mb-2 border-b pb-1 text-base">Parameter Settings</h3>
-<table class="w-full text-left border-collapse text-xs">
-<tr class="border-b border-gray-100"><td class="py-1 text-gray-600">Population Size</td><td class="font-mono text-blue-700 text-right">125</td></tr>
-<tr class="border-b border-gray-100"><td class="py-1 text-gray-600">Crossover Rate</td><td class="font-mono text-blue-700 text-right">0.7</td></tr>
-<tr class="border-b border-gray-100"><td class="py-1 text-gray-600">Mutation Rate</td><td class="font-mono text-blue-700 text-right">0.008</td></tr>
-<tr><td class="py-1 text-gray-600">Elitism Rate</td><td class="font-mono text-blue-700 text-right">0.04</td></tr>
-</table>
-</div>
-
-</div>
-
-<!-- Right Column: Results (间距缩小) -->
-<div class="p-4 bg-green-50 border-l-4 border-green-600 rounded shadow-sm">
-<h3 class="font-bold text-green-800 mb-3 text-base">Convergence & Termination</h3>
-
-<div class="space-y-3">
-  <div>
-    <p class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-0.5">Convergence Behavior</p>
-    <p class="text-gray-700 leading-snug">
-      The algorithm shows <strong>rapid fitness improvement</strong> in early iterations before stabilizing.
-    </p>
-  </div>
-
-  <div>
-    <p class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-0.5">Termination Condition</p>
-    <p class="text-gray-700 leading-snug">
-      Stops if fitness improvement is <strong>< 0.001</strong> over <strong>200 iterations</strong>.
-    </p>
-  </div>
-
-  <div>
-    <p class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-0.5">Performance Result</p>
-    <p class="text-gray-700 leading-snug">
-      Provides effective solutions in <strong>short CPU times</strong> even for large-scale datasets.
-    </p>
+<div class="flex flex-col items-center justify-center h-full ml-8">
+  <div class="border-2 border-dashed border-gray-400 rounded-lg p-2 w-full h-80 flex items-center justify-center bg-gray-50">
+    <img 
+      src="./assets/fig3.png" 
+      class="max-h-full max-w-full object-contain" 
+      alt="Fig. 3. Comparison of heuristic information"
+    />
   </div>
 </div>
 
+---
+layout: two-cols
+---
+
+### Improvement 2: ABC Search Mechanism
+
+#### Enhancing Search Efficiency
+
+<div class="mt-5 space-y-5">
+
+<div>
+  <h4 class="text-x font-bold text-blue-800 mb-3 border-l-4 border-blue-600 pl-4">
+    Employed Bees
+  </h4>
+  <ul class="list-disc list-outside ml-6 space-y-0 text-gray-700 text-m leading-relaxed">
+    <li>
+      <span class="font-bold text-black">Mechanism:</span> 
+      <strong>Shrinking Encircling</strong>.
+    </li>
+    <li>
+      <span class="font-bold text-black">Effect:</span> 
+      As iterations increase, the search range gradually shrinks towards the global optimal solution.
+    </li>
+    <li>
+      <span class="font-bold text-black">Goal:</span> 
+      Significantly improves <b>exploitation capability</b>.
+    </li>
+  </ul>
 </div>
 
+<div>
+  <h4 class="text-x font-bold text-yellow-700 mb-3 border-l-4 border-yellow-600 pl-4">
+    Onlooker Bees
+  </h4>
+  <ul class="list-disc list-outside ml-6 space-y-0 text-gray-700 text-m leading-relaxed">
+    <li>
+      <span class="font-bold text-black">Mechanism:</span> 
+      <strong>Spiral Update</strong>.
+    </li>
+    <li>
+      <span class="font-bold text-black">Effect:</span> 
+      Bees fly around the optimal solution in a spiral path.
+    </li>
+    <li>
+      <span class="font-bold text-black">Goal:</span> 
+      Balances <b>exploration and exploitation</b>.
+    </li>
+  </ul>
+</div>
+
+</div>
+
+::right::
+
+<div class="flex flex-col items-center justify-center h-full ml-8">
+  <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 w-full h-80 flex items-center justify-center bg-gray-50">
+    <img 
+      src="./assets/fig4.png" 
+      class="max-h-full max-w-full object-contain" 
+      alt="Fig. 4. Schematic diagram of the shrinking encircling mechanism"
+    />
+  </div>
+</div>
+
+---
+layout: two-cols
+---
+
+# Improvement 3: Path Optimization
+
+### Further Reducing Turn Times
+
+<div class="mt-4 space-y-4">
+
+<div>
+  <h4 class="text-lg font-bold text-blue-800 mb-1 border-l-4 border-blue-600 pl-3">
+    Principle
+  </h4>
+  <p class="text-gray-700 text-base leading-snug">
+    Check nodes on the path. If two non-adjacent nodes can be directly connected (without obstacles), remove the intermediate nodes.
+  </p>
+</div>
+
+<div>
+  <h4 class="text-lg font-bold text-green-800 mb-1 border-l-4 border-green-600 pl-3">
+    Effect
+  </h4>
+  <p class="text-gray-700 text-base leading-snug">
+    Significantly reduces the number of <b>turn times</b> and shortens the path length.
+  </p>
+</div>
+
+</div>
+
+::right::
+
+<div class="flex flex-col items-center justify-center h-full ml-6">
+  <div class="border-2 border-dashed border-gray-400 rounded-lg p-2 w-full h-60 flex items-center justify-center bg-gray-50">
+    <img 
+      src="./assets/fig6.png" 
+      class="max-h-full max-w-full object-contain" 
+      alt="Fig. 6. Path optimization mechanism"
+    />
+  </div>
 </div>
 
 ---
 layout: default
 ---
 
-# Comparative Results: GA vs. FCFS
+# Algorithm Execution Logic
 
-<div class="grid grid-cols-2 gap-6 mt-6 text-sm">
+### Complete Process Overview
 
-<!-- Left Column: Comparison & Trends -->
-<div class="flex flex-col gap-5">
+<div class="w-full max-w-4xl mx-auto mt-8 flex flex-col gap-2">
 
-<!-- Benchmark Section -->
-<div class="p-4 bg-blue-50 border-l-4 border-blue-600 rounded shadow-sm">
-<h3 class="font-bold text-blue-800 mb-2">Benchmark Strategy</h3>
-<p class="text-gray-700 leading-snug">
-Comparison between the proposed <strong>Genetic Algorithm (GA)</strong> and the traditional <strong>First-Come-First-Served (FCFS)</strong> strategy.
-</p>
+<div class="flex items-center bg-gray-50 rounded border-l-4 border-gray-400 p-1.5 shadow-sm">
+  <div class="flex-shrink-0 w-6 h-6 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center font-bold text-xs mr-3">1</div>
+  <div class="text-xs text-gray-800">
+    <span class="font-bold mr-1">Initialization:</span>
+    <span class="text-gray-600">Initialize algorithm parameters and establish the grid environment model.</span>
+  </div>
 </div>
 
-<!-- Findings Section -->
-<div class="p-4 bg-white border border-gray-200 rounded shadow-sm flex-grow">
-<h3 class="font-bold text-gray-800 mb-3 border-b pb-2">Experimental Findings</h3>
-<ul class="list-disc pl-4 space-y-3 text-gray-700 leading-snug">
-<li>
-<strong>Consistent Reduction:</strong><br>
-GA energy consumption is significantly lower than FCFS across all datasets (DS1 - DS10).
-</li>
-<li>
-<strong>Scaling Efficiency:</strong><br>
-Energy savings become more pronounced as the <strong>number of orders increases</strong>.
-</li>
-</ul>
+<div class="flex justify-start ml-2.5 -my-1 text-gray-300 text-[10px]">↓</div>
+
+<div class="flex items-center bg-yellow-50 rounded border-l-4 border-yellow-400 p-1.5 shadow-sm">
+  <div class="flex-shrink-0 w-6 h-6 rounded-full bg-yellow-100 text-yellow-700 flex items-center justify-center font-bold text-xs mr-3">2</div>
+  <div class="text-xs text-gray-800">
+    <span class="font-bold mr-1">ABC Phase:</span>
+    <span class="text-gray-600">Employed, Onlooker, and Scout Bees update path nodes to determine direction.</span>
+  </div>
 </div>
 
+<div class="flex justify-start ml-2.5 -my-1 text-gray-300 text-[10px]">↓</div>
+
+<div class="flex items-center bg-blue-50 rounded border-l-4 border-blue-500 p-1.5 shadow-sm">
+  <div class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs mr-3">3</div>
+  <div class="text-xs text-gray-800">
+    <span class="font-bold mr-1">ACO Phase:</span>
+    <span class="text-gray-600">Call <code>Createpath</code> (embedding ACO) to generate paths and calculate fitness.</span>
+  </div>
 </div>
 
-<!-- Right Column: Quantified Benefits -->
-<div class="flex flex-col gap-5">
+<div class="flex justify-start ml-2.5 -my-1 text-gray-300 text-[10px]">↓</div>
 
-<div class="p-5 bg-green-50 border-l-4 border-green-600 rounded shadow-sm h-full flex flex-col justify-center">
-<h3 class="font-bold text-green-800 mb-6">Quantified Benefits</h3>
-
-<!-- Stat Highlight -->
-<div class="bg-white p-6 rounded-lg border border-green-100 shadow-inner text-center mb-6">
-<p class="text-xs text-gray-500 uppercase tracking-widest mb-2">Annual Energy Saving Rate</p>
-<p class="text-5xl font-bold text-green-600 mb-2">~23.5%</p>
-<p class="text-xs text-gray-400">*Based on Low Order Rate (40 orders/h)</p>
-</div>
-
-<!-- Impact Statement -->
-<div>
-<p class="font-bold text-gray-700 mb-1">Global Potential</p>
-<p class="text-gray-600 leading-snug">
-Demonstrates significant potential for large-scale energy conservation in warehouse operations globally.
-</p>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
----
-layout: default
----
-
-# Batch Size & Sensitivity Analysis
-
-<div class="grid grid-cols-2 gap-4 mt-2 text-sm">
-
-<div class="flex flex-col gap-2">
-
-<div class="p-3 bg-blue-50 border-l-4 border-blue-600 rounded shadow-sm">
-<h4 class="font-bold text-blue-800 mb-1 text-base">Experiment Setup</h4>
-<p class="text-gray-700 leading-snug text-xs">
-Tested the effect of different <strong>batch sizes (1 to 6)</strong> on total energy consumption using dataset DS3.
-</p>
-</div>
-
-<div class="p-3 bg-white border border-gray-200 rounded shadow-sm flex-grow">
-<h4 class="font-bold text-gray-800 mb-2 border-b pb-1 text-base">Key Findings</h4>
-<ul class="list-disc pl-4 space-y-2 text-gray-700 leading-snug text-xs">
-<li>
-<strong>Significant Impact:</strong><br>
-Batch size has a reasonable and significant effect on total energy consumption.
-</li>
-<li>
-<strong>Optimal Size:</strong><br>
-Minimum energy consumption is achieved at <strong>Batch Size = 2</strong> in this warehouse setting.
-</li>
-<li>
-<strong>Trend:</strong><br>
-Energy consumption <strong>increases</strong> as batch size grows beyond 2.
-</li>
-</ul>
-</div>
-
-</div>
-
-<div class="p-4 bg-green-50 border-l-4 border-green-600 rounded shadow-sm h-full">
-<h3 class="font-bold text-green-800 mb-4 text-base">Warehouse Scalability</h3>
-
-<div class="space-y-5">
-<div>
-<p class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-1">Test Scenarios</p>
-<p class="text-gray-700 leading-snug text-xs">
-Algorithm was tested on warehouses with varying characteristics, ranging from <strong>1200 to 2800 storage locations</strong>.
-</p>
-</div>
-
-<div>
-<p class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-1">Adaptability Result</p>
-<p class="text-gray-700 leading-snug text-xs">
-While energy consumption increases slightly with warehouse size, the algorithm <strong>remains effective</strong> across all configurations.
-</p>
-</div>
-</div>
-
-</div>
-
-</div>
-
----
-layout: default
----
-
-# Conclusions
-
-<div class="grid grid-cols-3 gap-5 mt-8 text-sm">
-
-<div class="p-4 bg-blue-50 border-l-4 border-blue-600 rounded shadow-sm">
-<h3 class="font-bold text-blue-800 mb-3 text-base">Research Summary</h3>
-<ul class="list-disc pl-4 space-y-3 text-gray-700 leading-snug">
-<li>
-<strong>Energy Focus:</strong><br>
-Unlike previous studies on time or distance, this study focuses on <strong>minimizing energy consumption</strong> in manual warehouses.
-</li>
-<li>
-<strong>Green Integration:</strong><br>
-Integrates environmental thinking into warehouse operations management.
-</li>
-</ul>
-</div>
-
-<div class="p-4 bg-green-50 border-l-4 border-green-600 rounded shadow-sm">
-<h3 class="font-bold text-green-800 mb-3 text-base">Main Contributions</h3>
-<ul class="list-disc pl-4 space-y-3 text-gray-700 leading-snug">
-<li>
-<strong>Algorithm Development:</strong><br>
-Developed a Genetic Algorithm that combines <strong>order batching</strong> and <strong>routing optimization</strong>.
-</li>
-<li>
-<strong>Performance:</strong><br>
-Proven to have <strong>high computational efficiency</strong> and is adaptable to different types of warehouses.
-</li>
-</ul>
-</div>
-
-<div class="p-4 bg-purple-50 border-l-4 border-purple-600 rounded shadow-sm">
-<h3 class="font-bold text-purple-800 mb-3 text-base">Future Directions</h3>
-<p class="text-gray-700 leading-snug mb-2">
-Design a comprehensive <strong>Decision Support System</strong> integrating:
-</p>
-<ul class="list-disc pl-4 space-y-1 text-gray-700 text-xs mb-3">
-<li>Storage Assignment</li>
-<li>Order Batching</li>
-<li>Routing Optimization</li>
-</ul>
-<p class="text-gray-700 leading-snug">
-<strong>Goal:</strong> Achieve environmentally sustainable warehouse operations.
-</p>
+<div class="flex items-center bg-green-50 rounded border-l-4 border-green-500 p-1.5 shadow-sm">
+  <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-700 flex items-center justify-center font-bold text-xs mr-3">4</div>
+  <div class="text-xs text-gray-800">
+    <span class="font-bold mr-1">Output:</span>
+    <span class="text-gray-600">Check termination conditions. If met, output the <b>Global Optimal Path</b>.</span>
+  </div>
 </div>
 
 </div>
