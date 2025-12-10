@@ -19,7 +19,7 @@ drawings:
 mdc: true
 ---
 
-## A mixing algorithm of ACO and ABC for solving path planning of mobile robot
+## Research on Complex Logistics Environment Path Planning Based on Ant Colony Algorithm and Deep Reinforcement Learning
 
 <div class="mt-12 py-1" hover:bg="white op-10">
   Zhao Zhiyu
@@ -42,400 +42,320 @@ layout: default
 
 ### Last Week
 
-* **Paper:** *A genetic algorithm for minimizing energy consumption in warehouses*
-* **Focus:** Understanding Solution methodology and Numerical experiments.
-
-<br/>
-
-### This Week
-
 * **Paper:** *A mixing algorithm of ACO and ABC for solving path planning of mobile robot*
 * **Focus:** Understanding the Grid environment model and Improved ACO-ABC algorithm.
 
 <br/>
 
+### This Week
+
+* **Focus:** Organized self research.
+
+<br/>
+
 ### Next Week
 
-* **Paper:** *A mixing algorithm of ACO and ABC for solving path planning of mobile robot*
-* **Focus:** Understanding the Experiments and numerical analysis.
+* **Focus:** Find some other good articles to read.
 
 ---
-# 这是一个注释：使用 'layout: default' 布局
-layout: default
+layout: image-right
+image: ./assets/robot.png
+backgroundSize: 400px 80%
 ---
 
-<div style="display: flex; justify-content: center">
-<img style="height: 450px; width: 650px " src="./assets/e765eb7d-6fab-4cf0-8280-8c342432003a.jpg">
+## Background
+
+- 🤖 **Lots of Robots** - More and more robots are working in big buildings to move stuff for us.
+- 🤔 **The Problem** - These places are very busy. The robots' old plans are too simple, so they get confused when things move.
+- 🔋 **Wasted Power** - When they get confused, the robots take longer trips. This wastes a lot of electricity, which is not good for our Earth.
+
+We need to give the robots a smarter brain. This will help them find the best path, save energy, and protect our world!
+
+<style>
+h2 {
+  background-color: #9A003D;
+  background-image: linear-gradient(45deg, #9A003D 10%, #9A003D 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+<!--
+So, let's look at the background for my research.
+First, there are lots of robots. Because we all shop online more, companies use more robots in their warehouses to move things quickly.
+But there is a problem. These warehouses are very busy and always changing. The robots' plans are too simple, like a basic map. They get confused when something unexpected blocks their way.
+This confusion causes them to take long, inefficient trips. This wastes a lot of battery power. With thousands of robots, it's a big waste of electricity and bad for the environment.
+So, the goal of my research is to give these robots a smarter brain. A brain that can see the busy environment and make smart decisions. This will help them find the best path, save energy, and create a greener system.
+-->
+
+---
+layout: image-right
+image: ./assets/warehouse.png
+backgroundSize: 400px 80%
+---
+
+## Objective
+
+```mermaid {theme: 'neutral', scale: 0.8}
+graph TD
+    A["Integrates both global and local path planning"]
+
+    B["Global Path Planning"]
+    C["Local Path Planning"]
+    
+    D["
+    - Ensures the robot follows the global path.<br/>
+    - Can timely avoid obstacles in a dynamic environment.<br/>
+    - Maintains both flexibility and efficiency of the path"]
+
+    A --> B
+    A --> C
+    B --> D
+    C --> D
+```
+
+<style>
+h2 {
+  background-color: #9A003D;
+  background-image: linear-gradient(45deg, #9A003D 10%, #9A003D 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+<!-- 
+So, what is the objective of my research?
+My goal is to create a system that combines two kinds of planning. You can think of it as a "big plan" and a "quick reaction" plan.
+The "big plan" is Global Path Planning. It's like using a map to find the best main route for a long trip.
+The "quick reaction" is Local Path Planning. This helps the robot see and avoid sudden obstacles, like another robot that is in the way.
+When we combine these two plans, we get three good results:
+The robot follows the best and most efficient main path.
+It can quickly and safely avoid any surprises.
+This makes the robot's final path both fast and flexible. This is the main goal.
+-->
+
+---
+layout: image-right
+image: ./assets/path planning.png
+backgroundSize: 200px 80%
+---
+
+## Method
+
+```mermaid
+graph TD
+    %% 1. 定义所有节点
+    A[Start]
+    B["Ant colony algorithm"]
+    C["Dueling Double Deep Q-Network"]
+    D["Reward"]
+    E["Ensure local adjustments don't deviate from global path"]
+    F[End]
+
+    %% 2. 定义节点之间的连接关系
+    A --> B
+    A --> C
+    B --> D
+    C --> D
+    D --> E
+    E --> F
+```
+
+<style>
+h2 {
+  background-color: #9A003D;
+  background-image: linear-gradient(45deg, #9A003D 10%, #9A003D 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+<!-- Now, I will explain my method. It uses two main parts that work together.
+
+First, the Ant Colony Algorithm creates the "big plan." It finds the best and most efficient order to visit all the targets on the map.
+
+Second, the Dueling Double Deep Q-Network is for the "quick reactions." It is the robot's smart brain that helps it make decisions in real-time to avoid any surprise obstacles.
+
+The robot learns by getting rewards. It gets points for good actions, like following the big plan and avoiding walls.
+
+A key rule is that the robot's quick, local moves should not go too far away from the efficient main path.
+
+On the right, you can see an example. The top image shows the simple global path. The bottom image shows the robot's final path. It makes small changes to avoid things, but it still follows the main route. -->
+
+---
+layout: image-right
+image: ./assets/ant.png
+backgroundSize: 80%
+---
+
+## Global Path Planning
+
+<b>Ant Colony Optimization</b>
+<div>
+
+* **Idea:** 
+    * Ants leave a special scent on the ground.
+    * Shorter paths get a stronger scent, which attracts more ants.
+
+* **How Our Program Does It:**
+    * "Virtual ants" in the computer explore many different routes.
+    * Short routes get a strong "digital scent."
+
+* **The Goal:**
+    * To find the **best and shortest order** for the robot to visit all its targets.
 </div>
 
+<style>
+h2, b {
+  background-color: #9A003D;
+  background-image: linear-gradient(45deg, #9A003D 10%, #9A003D 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+div {
+  font-size: 14px
+}
+</style>
+
+<!-- First, let's look at Global Path Planning. I used the Ant Colony Optimization algorithm for this part.
+
+The main idea comes from how real ants find food. When an ant finds a good, short path, it leaves a special scent. This scent gets stronger as more ants use the path, and it attracts even more ants.
+
+My computer program does the same thing. I create "virtual ants" that explore many different routes to the robot's targets. When they find a short route, they leave a strong "digital scent."
+
+The pictures on the right show this process. At first, the paths are random. But slowly, the shorter, better paths get a stronger scent, and the bad paths are forgotten.
+
+So, the final goal of this method is to find the single best and shortest order for the robot to visit all of its targets. -->
+
 ---
+layout: image-right
+image: ./assets/D3QN.png
+backgroundSize: 80%
+---
+
+## Local Path Planning
+
+<b>Dueling Double Deep Q-Network</b>
+<div>
+
+* **Idea:** 
+    * Inspired by how we train a pet with rewards.
+    * The robot learns from trial and error, just like a pet learns tricks for a treat.
+
+* **How Our Program Does It:**
+    * The robot tries many different moves to explore the area.
+    * It gets "points" (rewards) for good moves, like getting closer to the goal.
+    * It loses points for bad moves, like hitting a wall.
+
+* **The Goal:**
+    * To teach the robot a smart strategy so it automatically knows the best and safest move to make in any situation.
+
+</div>
+
+<style>
+h2, b {
+  background-color: #9A003D;
+  background-image: linear-gradient(45deg, #9A003D 10%, #9A003D 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+div {
+  font-size: 12px
+}
+</style>
+
+<!-- Next is Local Path Planning. This is the "quick reaction" part of my method, and I used a technique called the Dueling Double Deep Q-Network.
+
+The main idea is very similar to how we train a pet. The robot learns from trial and error. If it does something good, it gets a reward, and it learns to avoid bad actions.
+
+In my program, the robot explores by trying many different moves. It gets points, or rewards, for good moves, like getting closer to its goal. And it loses points for bad moves, like hitting a wall.
+
+The diagram on the right shows a small piece of the robot's "brain." This brain learns from all the rewards and punishments.
+
+The final goal is to teach this brain a smart strategy. After a lot of training, the robot will automatically know the best and safest move to make in any situation. -->
+
+---
+# Frontmatter for configuration
+title: 'Expected Results'
 layout: center
 ---
 
-<div class="w-full max-w-6xl mx-auto">
+## What We Hope to Achieve
 
-<h1 class="text-5xl font-bold mb-16 text-center text-blue-900">Table of Contents</h1>
+<div class="grid grid-cols-3 gap-8 text-center mt-10">
 
-<div class="grid grid-cols-2 gap-x-20 gap-y-12 w-full px-8">
-
-  <div class="flex items-center border-l-4 border-gray-300 pl-4">
-    <span class="text-4xl font-bold text-gray-300 mr-4">01</span>
-    <span class="text-2xl font-bold text-gray-800">Introduction</span>
-  </div>
-
-  <div class="flex items-center border-l-4 border-gray-300 pl-4">
-    <span class="text-4xl font-bold text-gray-300 mr-4">02</span>
-    <span class="text-2xl font-bold text-gray-800">Mathematical Model of Path Planning</span>
-  </div>
-
-  <div class="flex items-center border-l-4 border-gray-300 pl-4">
-    <span class="text-4xl font-bold text-gray-300 mr-4">03</span>
-    <span class="text-2xl font-bold text-gray-800">Improved ACO-ABC Algorithm</span>
-  </div>
-
-  <div class="flex items-center border-l-4 border-gray-300 pl-4">
-    <span class="text-4xl font-bold text-gray-300 mr-4">04</span>
-    <span class="text-2xl font-bold text-gray-800">Experiments & Numerical Analysis</span>
-  </div>
-
-  <div class="flex items-center border-l-4 border-gray-300 pl-4">
-    <span class="text-4xl font-bold text-gray-300 mr-4">05</span>
-    <span class="text-2xl font-bold text-gray-800">Discussion</span>
-  </div>
-
-  <div class="flex items-center border-l-4 border-gray-300 pl-4">
-    <span class="text-4xl font-bold text-gray-300 mr-4">06</span>
-    <span class="text-2xl font-bold text-gray-800">Conclusion</span>
-  </div>
-
-</div>
-
-</div>
-
----
-layout: two-cols
----
-
-# Research Objective & Modeling
-
-### 1. Research Objective
-To find an **optimal and collision-free path** for a mobile robot within the workspace.
-
-### 2. Environment Modeling
-Adopting the **Grid Method** to model the space. The environment is divided into a grid map:
-
-* ⬛ **Black Grid**: Represents an **Obstacle**.
-* ⬜ **White Grid**: Represents a **Free area**.
-* 🟥 **S**: Represents the **Start point**.
-* 🟦 **T**: Represents the **Target point**.
-
-::right::
-
-<div class="flex flex-col items-center justify-center h-full ml-4">
-  <div class="border-2 border-dashed border-gray-400 rounded-lg p-6 w-full h-80 flex items-center justify-center bg-gray-50">
-    <img 
-      src="./assets/fig1.png" 
-      class="max-h-full max-w-full object-contain" 
-      alt="Fig. 1. Space environment model"
-    />
-  </div>
-</div>
-
----
-layout: default
----
-
-# Research Background & Motivation
-
-### Why combine ACO and ABC?
-
-<div class="grid grid-cols-2 gap-16 mt-12">
-
-<div>
-  <h4 class="text-2xl text-blue-800 font-bold mb-6 border-b-2 border-blue-200 pb-2">
-    Ant Colony Optimization (ACO)
-  </h4>
-  <div class="space-y-6 text-gray-700">
-    <div>
-      <span class="font-bold text-green-700 text-lg block mb-1">Pros</span>
-      <span>Strong robustness.</span>
+  <div>
+    <div class="text-4xl">
+      📈
     </div>
-    <div>
-      <span class="font-bold text-red-700 text-lg block mb-1">Cons</span>
-      <span>Slow convergence speed, blindness in the early search stage, and easy to fall into local optima.</span>
+    <h3 class="font-bold mt-2">More Efficient</h3>
+    <ul class="text-left mt-2 text-sm">
+      <li>Faster task completion</li>
+      <li>Shorter travel distance</li>
+      <li>Less waiting time</li>
+    </ul>
+  </div>
+
+  <div>
+    <div class="text-4xl">
+      🛡️
     </div>
+    <h3 class="font-bold mt-2">Smarter & Safer</h3>
+    <ul class="text-left mt-2 text-sm">
+      <li>Higher success rate</li>
+      <li>Better at avoiding surprises</li>
+      <li>Fewer collisions</li>
+    </ul>
   </div>
-</div>
 
-<div>
-  <h4 class="text-2xl text-yellow-700 font-bold mb-6 border-b-2 border-yellow-200 pb-2">
-    Artificial Bee Colony (ABC)
-  </h4>
-  <div class="space-y-6 text-gray-700">
-    <div>
-      <span class="font-bold text-green-700 text-lg block mb-1">Pros</span>
-      <span>High search efficiency and fast convergence speed.</span>
+  <div>
+    <div class="text-4xl">
+      🌿
     </div>
-    <div>
-      <span class="font-bold text-red-700 text-lg block mb-1">Cons</span>
-      <span>Early convergence and poor initial path planning effect.</span>
-    </div>
+    <h3 class="font-bold mt-2">Greener</h3>
+    <ul class="text-left mt-2 text-sm">
+      <li>Less wasted energy</li>
+      <li>Longer battery life</li>
+      <li>Smaller carbon footprint</li>
+    </ul>
+  </div>
+
+  <div class="w-200 h-50 flex justify-center items-center">
+    <img class="w-full h-full object-cover" src='./assets/green.png'>
   </div>
 </div>
 
-</div>
+<style>
+h2 {
+  background-color: #9A003D;
+  background-image: linear-gradient(45deg, #9A003D 10%, #9A003D 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
 
-<div class="mt-16 text-center">
-  <p class="text-xl text-gray-800 bg-gray-50 py-4 rounded-lg border border-gray-200">
-    <span class="font-bold text-primary">Strategy:</span> Combine the advantages of both to propose the <b>IACO-IABC algorithm</b>.
-  </p>
-</div>
+<!-- So, what do we hope to achieve with this research? There are three main benefits.
 
----
-layout: two-cols
----
+First, the robots will be more efficient. This means they will finish their tasks faster, travel shorter distances, and spend less time waiting.
 
-# IACO-IABC Hybrid Strategy
+Second, they will be smarter and safer. They will be much better at avoiding surprise obstacles. This leads to a higher success rate and, most importantly, fewer collisions.
 
-<div class="mt-8 space-y-8">
-
-<div>
-  <h4 class="text-xl font-bold text-gray-800 mb-2">1. Phased Collaboration</h4>
-  <ul class="list-disc list-outside ml-5 space-y-4 text-gray-700">
-    <li>
-      <span class="font-bold text-blue-700">Global Search (ABC):</span>
-      <span>Uses improved ABC to quickly generate "Basic Nodes" of the path, determining the general direction.</span>
-    </li>
-    <li>
-      <span class="font-bold text-blue-700">Local Connection (ACO):</span>
-      <span>Uses improved ACO to find the optimal connection between these basic nodes.</span>
-    </li>
-  </ul>
-</div>
-
-<div>
-  <h4 class="text-xl font-bold text-gray-800 mb-2">2. Advantage</h4>
-  <p class="text-gray-700">
-    Utilizes ABC's global search capability and ACO's path optimization capability.
-  </p>
-</div>
-
-</div>
-
-::right::
-
-<div class="flex flex-col items-center justify-center h-full ml-6">
-  <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 w-full h-96 flex items-center justify-center bg-gray-50">
-    <img 
-      src="./assets/fig9.png" 
-      class="max-h-full max-w-full object-contain" 
-      alt="Fig. 9. Basic process of the IACO-IABC algorithm"
-    />
-  </div>
-</div>
-
----
-layout: two-cols
----
-
-### Improvement 1: ACO Heuristic Mechanism
-
-#### Solving the "Blind Search" Problem
-
-<div class="mt-5 space-y-5">
-
-<div>
-  <h4 class="text-xl font-bold text-red-800 mb-3 border-l-4 border-red-600 pl-4">
-    Traditional Problem
-  </h4>
-  <p class="text-gray-700 text-l leading-relaxed">
-    Traditional heuristic functions only consider the distance between the current node and the next node. This results in <b>weak guidance</b> and leads to blind searching.
-  </p>
-</div>
-
-<div>
-  <h4 class="text-xl font-bold text-green-800 mb-3 border-l-4 border-green-600 pl-4">
-    Improved Method
-  </h4>
-  <ul class="list-disc list-outside ml-6 space-y-0.1 text-gray-700 text-l leading-relaxed">
-    <li>
-      <span class="font-bold text-black">New Factors:</span> Incorporates <strong>Direction</strong> and <strong>Turning</strong> information into the function.
-    </li>
-    <li>
-      <span class="font-bold text-black">Geometric Context:</span> Considers the Start, Current, and Target positions simultaneously.
-    </li>
-    <li>
-      <span class="font-bold text-black">Goal:</span> Prioritizes nodes facing the target to reduce unnecessary turns.
-    </li>
-  </ul>
-</div>
-
-</div>
-
-::right::
-
-<div class="flex flex-col items-center justify-center h-full ml-8">
-  <div class="border-2 border-dashed border-gray-400 rounded-lg p-2 w-full h-80 flex items-center justify-center bg-gray-50">
-    <img 
-      src="./assets/fig3.png" 
-      class="max-h-full max-w-full object-contain" 
-      alt="Fig. 3. Comparison of heuristic information"
-    />
-  </div>
-</div>
-
----
-layout: two-cols
----
-
-### Improvement 2: ABC Search Mechanism
-
-#### Enhancing Search Efficiency
-
-<div class="mt-5 space-y-5">
-
-<div>
-  <h4 class="text-x font-bold text-blue-800 mb-3 border-l-4 border-blue-600 pl-4">
-    Employed Bees
-  </h4>
-  <ul class="list-disc list-outside ml-6 space-y-0 text-gray-700 text-m leading-relaxed">
-    <li>
-      <span class="font-bold text-black">Mechanism:</span> 
-      <strong>Shrinking Encircling</strong>.
-    </li>
-    <li>
-      <span class="font-bold text-black">Effect:</span> 
-      As iterations increase, the search range gradually shrinks towards the global optimal solution.
-    </li>
-    <li>
-      <span class="font-bold text-black">Goal:</span> 
-      Significantly improves <b>exploitation capability</b>.
-    </li>
-  </ul>
-</div>
-
-<div>
-  <h4 class="text-x font-bold text-yellow-700 mb-3 border-l-4 border-yellow-600 pl-4">
-    Onlooker Bees
-  </h4>
-  <ul class="list-disc list-outside ml-6 space-y-0 text-gray-700 text-m leading-relaxed">
-    <li>
-      <span class="font-bold text-black">Mechanism:</span> 
-      <strong>Spiral Update</strong>.
-    </li>
-    <li>
-      <span class="font-bold text-black">Effect:</span> 
-      Bees fly around the optimal solution in a spiral path.
-    </li>
-    <li>
-      <span class="font-bold text-black">Goal:</span> 
-      Balances <b>exploration and exploitation</b>.
-    </li>
-  </ul>
-</div>
-
-</div>
-
-::right::
-
-<div class="flex flex-col items-center justify-center h-full ml-8">
-  <div class="border-2 border-dashed border-gray-400 rounded-lg p-4 w-full h-80 flex items-center justify-center bg-gray-50">
-    <img 
-      src="./assets/fig4.png" 
-      class="max-h-full max-w-full object-contain" 
-      alt="Fig. 4. Schematic diagram of the shrinking encircling mechanism"
-    />
-  </div>
-</div>
-
----
-layout: two-cols
----
-
-# Improvement 3: Path Optimization
-
-### Further Reducing Turn Times
-
-<div class="mt-4 space-y-4">
-
-<div>
-  <h4 class="text-lg font-bold text-blue-800 mb-1 border-l-4 border-blue-600 pl-3">
-    Principle
-  </h4>
-  <p class="text-gray-700 text-base leading-snug">
-    Check nodes on the path. If two non-adjacent nodes can be directly connected (without obstacles), remove the intermediate nodes.
-  </p>
-</div>
-
-<div>
-  <h4 class="text-lg font-bold text-green-800 mb-1 border-l-4 border-green-600 pl-3">
-    Effect
-  </h4>
-  <p class="text-gray-700 text-base leading-snug">
-    Significantly reduces the number of <b>turn times</b> and shortens the path length.
-  </p>
-</div>
-
-</div>
-
-::right::
-
-<div class="flex flex-col items-center justify-center h-full ml-6">
-  <div class="border-2 border-dashed border-gray-400 rounded-lg p-2 w-full h-60 flex items-center justify-center bg-gray-50">
-    <img 
-      src="./assets/fig6.png" 
-      class="max-h-full max-w-full object-contain" 
-      alt="Fig. 6. Path optimization mechanism"
-    />
-  </div>
-</div>
-
----
-layout: default
----
-
-# Algorithm Execution Logic
-
-### Complete Process Overview
-
-<div class="w-full max-w-4xl mx-auto mt-8 flex flex-col gap-2">
-
-<div class="flex items-center bg-gray-50 rounded border-l-4 border-gray-400 p-1.5 shadow-sm">
-  <div class="flex-shrink-0 w-6 h-6 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center font-bold text-xs mr-3">1</div>
-  <div class="text-xs text-gray-800">
-    <span class="font-bold mr-1">Initialization:</span>
-    <span class="text-gray-600">Initialize algorithm parameters and establish the grid environment model.</span>
-  </div>
-</div>
-
-<div class="flex justify-start ml-2.5 -my-1 text-gray-300 text-[10px]">↓</div>
-
-<div class="flex items-center bg-yellow-50 rounded border-l-4 border-yellow-400 p-1.5 shadow-sm">
-  <div class="flex-shrink-0 w-6 h-6 rounded-full bg-yellow-100 text-yellow-700 flex items-center justify-center font-bold text-xs mr-3">2</div>
-  <div class="text-xs text-gray-800">
-    <span class="font-bold mr-1">ABC Phase:</span>
-    <span class="text-gray-600">Employed, Onlooker, and Scout Bees update path nodes to determine direction.</span>
-  </div>
-</div>
-
-<div class="flex justify-start ml-2.5 -my-1 text-gray-300 text-[10px]">↓</div>
-
-<div class="flex items-center bg-blue-50 rounded border-l-4 border-blue-500 p-1.5 shadow-sm">
-  <div class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs mr-3">3</div>
-  <div class="text-xs text-gray-800">
-    <span class="font-bold mr-1">ACO Phase:</span>
-    <span class="text-gray-600">Call <code>Createpath</code> (embedding ACO) to generate paths and calculate fitness.</span>
-  </div>
-</div>
-
-<div class="flex justify-start ml-2.5 -my-1 text-gray-300 text-[10px]">↓</div>
-
-<div class="flex items-center bg-green-50 rounded border-l-4 border-green-500 p-1.5 shadow-sm">
-  <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-700 flex items-center justify-center font-bold text-xs mr-3">4</div>
-  <div class="text-xs text-gray-800">
-    <span class="font-bold mr-1">Output:</span>
-    <span class="text-gray-600">Check termination conditions. If met, output the <b>Global Optimal Path</b>.</span>
-  </div>
-</div>
-
-</div>
+Finally, being more efficient also makes the robots greener. When they use less energy, their batteries last longer. This reduces electricity waste and helps lower the warehouse's carbon footprint, supporting sustainability. -->
